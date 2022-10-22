@@ -6,6 +6,7 @@
 
 html {
   overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .App {
@@ -33,5 +34,34 @@ html {
 .calendar-grid {
   width: 90%;
   height: 85%;
-  border: 1px solid black;
+  border: 1px solid grey;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 40px repeat(5, 1fr);
+  background-color: grey;
+  gap: 1px;
+}
+
+.day-name {
+  background-color: rgb(240, 240, 240);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.weekend {
+  color: rgb(180, 0, 0);
+}
+
+.day {
+  background-color: rgb(240, 240, 240);
+  cursor: pointer;
+}
+
+.day:hover {
+  background-color: rgb(150, 200, 255);
+}
+
+.first-col {
+  background-color: lightgrey;
 }
