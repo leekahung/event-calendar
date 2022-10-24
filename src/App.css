@@ -31,13 +31,30 @@ html {
   gap: 40px;
 }
 
+.calendar-month-year {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  gap: 50px;
+}
+
+.calendar-month-year h1 {
+  width: 300px;
+}
+
+.calendar-month-year button {
+  width: 40px;
+  height: 40px;
+}
+
 .calendar-grid {
   width: 90%;
   height: 85%;
   border: 1px solid grey;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: 40px repeat(5, 1fr);
+  grid-template-rows: 40px repeat(6, 1fr);
   background-color: grey;
   gap: 1px;
 }
@@ -49,8 +66,9 @@ html {
   justify-content: center;
 }
 
-.weekend {
-  color: rgb(180, 0, 0);
+.day-name:is(:nth-child(7n-6), :nth-child(7n)) {
+  background-color: lightgrey;
+  color: rgb(140, 0, 0);
 }
 
 .day {
@@ -58,10 +76,10 @@ html {
   cursor: pointer;
 }
 
-.day:hover {
-  background-color: rgb(150, 200, 255);
+.day:is(:nth-child(7n-6), :nth-child(7n)) {
+  background-color: lightgrey;
 }
 
-.first-col {
-  background-color: lightgrey;
+.day:hover {
+  background-color: rgb(150, 200, 255);
 }
