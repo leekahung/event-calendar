@@ -83,3 +83,7 @@ html {
 .day:hover {
   background-color: rgb(150, 200, 255);
 }
+
+.day.today {
+  background-color: pink;
+}
