@@ -1,3 +1,5 @@
+import AddEvent from "./AddEvent";
+
 interface Props {
   dateValue: number,
 }

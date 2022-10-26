@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AddEvent from "./AddEvent";
 import AddEventButton from "./AddEventButton";
 
 interface Props {
@@ -60,11 +61,6 @@ const Calendar = ({date}: Props) => {
         : (React.createElement("div", { className: classNames, key: keyIndex }));
     };
 
-    const handleButtonClose = (event: React.MouseEvent<HTMLButtonElement>) => {
-      const eventAdder = document.getElementById("event-adder") as HTMLDialogElement;
-      eventAdder.style.visibility = "hidden";
-    }
-
   return (
     <div className="calendar-ctnr">
       <div className="calendar-month-year">
@@ -98,9 +94,7 @@ const Calendar = ({date}: Props) => {
           }
         })}
       </div>
-      <dialog id="event-adder">
-        <button onClick={handleButtonClose}>Close</button>
-      </dialog>
+      <AddEvent />
     </div>
   );
 }

@@ -113,4 +113,5 @@ body {
   background-color: rgb(240 , 240, 240);
   flex-direction: column;
   gap: 50px;
+  visibility: hidden;
 }
