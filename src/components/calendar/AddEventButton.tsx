@@ -1,19 +1,21 @@
-import AddEvent from "./AddEvent";
+import React from "react";
 
 interface Props {
-  dateValue: number,
+  dateValue: number
 }
 
 const AddEventButton = ({ dateValue }: Props) => {
   const handleButtonOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const eventAdder = document.getElementById("event-adder") as HTMLDialogElement;
-    eventAdder.style.visibility = "visible";
+    const dialogBox = document.getElementById("dialog-box") as HTMLDialogElement;
+    dialogBox.open = true;
   }
 
   return (
-    <button onClick={handleButtonOpen} id={String(dateValue)} >
-      {dateValue}
-    </button>
+    <>
+      <button onClick={handleButtonOpen} id={String(dateValue)}>
+        {dateValue}
+      </button>
+    </>
   );
 }
  

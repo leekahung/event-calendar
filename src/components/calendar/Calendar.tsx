@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import AddEvent from "./AddEvent";
 import AddEventButton from "./AddEventButton";
+import EventDialog from "./EventDialog";
 
 interface Props {
   date: Date;
@@ -30,24 +30,24 @@ const Calendar = ({date}: Props) => {
   
     const [numFromMonth, setCountMonth] = useState(0);
     const [numFromYear, setCountYear] = useState(0);
-  
+
     const handleCountMonth = (direction: string) => {
       if (direction === "up") {
-        setCountMonth(numFromMonth + 1);
+        setCountMonth(numFromMonth => {return numFromMonth + 1});
         if (currMonth === "December") {
-          setCountYear(numFromYear + 1);
+          setCountYear(numFromYear => {return numFromYear + 1});
         }; 
       } else {
-        setCountMonth(numFromMonth - 1);
+        setCountMonth(numFromMonth => {return numFromMonth - 1});
         if (currMonth === "January") {
-          setCountYear(numFromYear - 1);
+          setCountYear(numFromYear => {return numFromYear - 1});
         };
       }
     }
   
-    const currYear = date.getFullYear() + numFromYear;
+    let currYear = date.getFullYear() + numFromYear;
     const currMonthIndex = mod((date.getMonth() + numFromMonth), 12);
-    const currMonth = month[currMonthIndex];
+    let currMonth = month[currMonthIndex];
     const daysInCurrMonth = daysInMonth(currYear, currMonthIndex + 1);
     const firstDayCurrMonth = getFirstDayIndex();
 
@@ -57,7 +57,7 @@ const Calendar = ({date}: Props) => {
       dateValue?: number
     ) => {
       return (typeof dateValue !== "undefined")
-        ? (React.createElement("div", { className: classNames, key: keyIndex }, <AddEventButton dateValue={dateValue} />))
+        ? (React.createElement("div", { className: classNames, key: keyIndex }, <AddEventButton dateValue={dateValue}/>))
         : (React.createElement("div", { className: classNames, key: keyIndex }));
     };
 
@@ -94,7 +94,9 @@ const Calendar = ({date}: Props) => {
           }
         })}
       </div>
-      <AddEvent />
+      <dialog id="dialog-box">
+        <EventDialog month={currMonth} year={currYear}/>
+      </dialog>
     </div>
   );
 }
