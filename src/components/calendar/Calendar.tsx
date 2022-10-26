@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-const Calendar = () => {
+interface Props {
+  date: Date;
+}
+
+const Calendar = ({date}: Props) => {
     /* JavaScript Modulo Function Implementation */
     const mod = (a: number, b: number) => {
       return ((a % b) + b) % b;
@@ -39,35 +43,52 @@ const Calendar = () => {
       }
     }
   
-    const date = new Date();
-    let currYear = date.getFullYear() + numFromYear;
-    let currMonthIndex = mod((date.getMonth() + numFromMonth), 12);
-    let currMonth = month[currMonthIndex];
-    let daysInCurrMonth = daysInMonth(currYear, currMonthIndex + 1);
-    let firstDayCurrMonth = getFirstDayIndex();
+    const currYear = date.getFullYear() + numFromYear;
+    const currMonthIndex = mod((date.getMonth() + numFromMonth), 12);
+    const currMonth = month[currMonthIndex];
+    const daysInCurrMonth = daysInMonth(currYear, currMonthIndex + 1);
+    const firstDayCurrMonth = getFirstDayIndex();
+
+    const createDay = (
+      classNames: string,
+      dateValue?: number
+    ) => {
+      return (typeof dateValue !== "undefined")
+        ? (React.createElement("div", { className: classNames, key: dateValue }, <button>{dateValue}</button>))
+        : (React.createElement("div", { className: classNames }));
+    };
 
   return (
     <div className="calendar-ctnr">
       <div className="calendar-month-year">
         <button onClick={() => {
           handleCountMonth("down");
-          }}>&lt;</button>
+          }}>	&#9664;</button>
         <h1>{`${currMonth} ${currYear}`}</h1>
         <button onClick={() => {
           handleCountMonth("up");
-        }}>&gt;</button>
+        }}>&#9654;</button>
       </div>
       <div className="calendar-grid">
         {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursaday", "Friday", "Saturday"].map((item) => {
           return React.createElement("div", { className: "day-name", key: item }, item);
         })}
         {[...Array(42)].map((_, index) => {
-          return index === firstDayCurrMonth
-          ? (React.createElement("div", { className: "day first-day", key: index }, 1))
-          : ((firstDayCurrMonth < index && index < firstDayCurrMonth + daysInCurrMonth)
-            ? (React.createElement("div", { className: "day", key: index}, index - firstDayCurrMonth + 1))
-            : (React.createElement("div", { className: "day", key: index})) 
-            )
+          if (index === firstDayCurrMonth) {
+            if (date.getMonth() === currMonthIndex && date.getDate() === firstDayCurrMonth + 1) {
+              return createDay("day first-day today", index - firstDayCurrMonth + 1);
+            } else {
+              return createDay("day first-day", index - firstDayCurrMonth + 1);
+            }
+          } else if (firstDayCurrMonth < index && index < firstDayCurrMonth + daysInCurrMonth) {
+            if (date.getMonth() === currMonthIndex && date.getDate() === index - firstDayCurrMonth + 1) {
+              return createDay("day today", index - firstDayCurrMonth + 1);
+            } else {
+              return createDay("day", index - firstDayCurrMonth + 1);
+            }
+          } else {
+            return createDay("day empty");
+          }
         })}
       </div>
     </div>
