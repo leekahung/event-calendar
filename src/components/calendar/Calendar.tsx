@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AddEventButton from "./AddEventButton";
 
 interface Props {
   date: Date;
@@ -51,12 +52,18 @@ const Calendar = ({date}: Props) => {
 
     const createDay = (
       classNames: string,
+      keyIndex: number,
       dateValue?: number
     ) => {
       return (typeof dateValue !== "undefined")
-        ? (React.createElement("div", { className: classNames, key: dateValue }, <button>{dateValue}</button>))
-        : (React.createElement("div", { className: classNames }));
+        ? (React.createElement("div", { className: classNames, key: keyIndex }, <AddEventButton dateValue={dateValue} />))
+        : (React.createElement("div", { className: classNames, key: keyIndex }));
     };
+
+    const handleButtonClose = (event: React.MouseEvent<HTMLButtonElement>) => {
+      const eventAdder = document.getElementById("event-adder") as HTMLDialogElement;
+      eventAdder.style.visibility = "hidden";
+    }
 
   return (
     <div className="calendar-ctnr">
@@ -75,22 +82,25 @@ const Calendar = ({date}: Props) => {
         })}
         {[...Array(42)].map((_, index) => {
           if (index === firstDayCurrMonth) {
-            if (date.getMonth() === currMonthIndex && date.getDate() === firstDayCurrMonth + 1) {
-              return createDay("day first-day today", index - firstDayCurrMonth + 1);
+            if (date.getFullYear() === currYear && date.getMonth() === currMonthIndex && date.getDate() === firstDayCurrMonth + 1) {
+              return createDay("day first-day today", index, index - firstDayCurrMonth + 1);
             } else {
-              return createDay("day first-day", index - firstDayCurrMonth + 1);
+              return createDay("day first-day", index, index - firstDayCurrMonth + 1);
             }
           } else if (firstDayCurrMonth < index && index < firstDayCurrMonth + daysInCurrMonth) {
-            if (date.getMonth() === currMonthIndex && date.getDate() === index - firstDayCurrMonth + 1) {
-              return createDay("day today", index - firstDayCurrMonth + 1);
+            if (date.getFullYear() === currYear && date.getMonth() === currMonthIndex && date.getDate() === index - firstDayCurrMonth + 1) {
+              return createDay("day today", index, index - firstDayCurrMonth + 1);
             } else {
-              return createDay("day", index - firstDayCurrMonth + 1);
+              return createDay("day", index, index - firstDayCurrMonth + 1);
             }
           } else {
-            return createDay("day empty");
+            return createDay("day empty", index);
           }
         })}
       </div>
+      <dialog id="event-adder">
+        <button onClick={handleButtonClose}>Close</button>
+      </dialog>
     </div>
   );
 }
