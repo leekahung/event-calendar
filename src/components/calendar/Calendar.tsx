@@ -28,35 +28,39 @@ const Calendar = ({date}: Props) => {
       "September", "October", "November", "December"
     ];
   
-    const [numFromMonth, setCountMonth] = useState(0);
-    const [numFromYear, setCountYear] = useState(0);
+    // Set State Hooks and Handler for changing Month and Year
+    const [countMonth, setCountMonth] = useState(0);
+    const [countYear, setCountYear] = useState(0);
 
     const handleCountMonth = (direction: string) => {
       if (direction === "up") {
-        setCountMonth(numFromMonth => {return numFromMonth + 1});
+        setCountMonth(countMonth => {return countMonth + 1});
         if (currMonth === "December") {
-          setCountYear(numFromYear => {return numFromYear + 1});
+          setCountYear(countYear => {return countYear + 1});
         }; 
       } else {
-        setCountMonth(numFromMonth => {return numFromMonth - 1});
+        setCountMonth(countMonth => {return countMonth - 1});
         if (currMonth === "January") {
-          setCountYear(numFromYear => {return numFromYear - 1});
+          setCountYear(countYear => {return countYear - 1});
         };
       }
     }
   
-    let currYear = date.getFullYear() + numFromYear;
-    const currMonthIndex = mod((date.getMonth() + numFromMonth), 12);
+    // Initial Settings for Calender values
+    let currYear = date.getFullYear() + countYear;
+    let currMonthIndex = mod((date.getMonth() + countMonth), 12);
     let currMonth = month[currMonthIndex];
-    const daysInCurrMonth = daysInMonth(currYear, currMonthIndex + 1);
-    const firstDayCurrMonth = getFirstDayIndex();
+    let daysInCurrMonth = daysInMonth(currYear, currMonthIndex + 1);
+    let firstDayCurrMonth = getFirstDayIndex();
 
+    // Setting State Hook and Handler for Date Selection
     const [day, setDay] = useState(1);
 
     const handleButtonClick = (event: React.MouseEvent, day: number) => {
       setDay(day);
     }
 
+    // Helper function to populate calendar dynamically
     const createDay = (
       classNames: string,
       keyIndex: number,
@@ -75,16 +79,16 @@ const Calendar = ({date}: Props) => {
   return (
     <div className="calendar-ctnr">
       <div className="calendar-month-year">
-        <button onClick={() => {
-          handleCountMonth("down");
-          }}>	&#9664;</button>
+        <button onClick={() => {handleCountMonth("down");}}>	
+          &#9664;
+        </button>
         <h1>{`${currMonth} ${currYear}`}</h1>
-        <button onClick={() => {
-          handleCountMonth("up");
-        }}>&#9654;</button>
+        <button onClick={() => {handleCountMonth("up");}}>
+          &#9654;
+        </button>
       </div>
       <div className="calendar-grid">
-        {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursaday", "Friday", "Saturday"].map((item) => {
+        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((item) => {
           return React.createElement("div", { className: "day-name", key: item }, item);
         })}
         {[...Array(42)].map((_, index) => {
@@ -105,7 +109,13 @@ const Calendar = ({date}: Props) => {
           }
         })}
       </div>
-      <dialog id="dialog-box"><EventDialog month={currMonth} year={currYear} date={day} /></dialog>
+      <dialog id="dialog-box">
+        <EventDialog 
+          month={currMonth}
+          year={currYear}
+          date={day}
+        />
+      </dialog>
     </div>
   );
 }

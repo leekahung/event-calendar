@@ -1,5 +1,3 @@
-import React from "react";
-
 interface Props {
   dateValue: number,
   handleDaySelect: any
@@ -20,5 +18,5 @@ const AddEventButton = ({ dateValue, handleDaySelect }: Props) => {
     </>
   );
 }
- 
+
 export default AddEventButton;
