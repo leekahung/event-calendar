@@ -51,13 +51,24 @@ const Calendar = ({date}: Props) => {
     const daysInCurrMonth = daysInMonth(currYear, currMonthIndex + 1);
     const firstDayCurrMonth = getFirstDayIndex();
 
+    const [day, setDay] = useState(1);
+
+    const handleButtonClick = (event: React.MouseEvent, day: number) => {
+      setDay(day);
+    }
+
     const createDay = (
       classNames: string,
       keyIndex: number,
       dateValue?: number
     ) => {
       return (typeof dateValue !== "undefined")
-        ? (React.createElement("div", { className: classNames, key: keyIndex }, <AddEventButton dateValue={dateValue}/>))
+        ? (React.createElement("div", { className: classNames, key: keyIndex },
+          <AddEventButton
+            dateValue={dateValue}
+            handleDaySelect={(event: React.MouseEvent, day: number) => handleButtonClick(event, day)} 
+          />
+          ))
         : (React.createElement("div", { className: classNames, key: keyIndex }));
     };
 
@@ -94,9 +105,7 @@ const Calendar = ({date}: Props) => {
           }
         })}
       </div>
-      <dialog id="dialog-box">
-        <EventDialog month={currMonth} year={currYear}/>
-      </dialog>
+      <dialog id="dialog-box"><EventDialog month={currMonth} year={currYear} date={day} /></dialog>
     </div>
   );
 }
