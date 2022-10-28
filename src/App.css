@@ -21,10 +21,31 @@ body {
   display: flex;
 }
 
+/* Navigation Section */
+
 .navbar {
   width: 20%;
   background-color: grey;
+  transition: 0.4s;
 }
+
+#menu-icon, #menu-icon img {
+  width: 40px;
+  height: 40px;
+}
+
+#menu-icon {
+  position: fixed;
+  inset: 20px 0 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+/* Calendar Section */
 
 :is(.calendar-ctnr, .calendar-month-year, .day-name, #event-adder) {
   display: flex;
@@ -37,6 +58,7 @@ body {
   background-color: lightgrey;
   flex-direction: column;
   gap: 40px;
+  transition: 0.4s;
 }
 
 .calendar-month-year {
