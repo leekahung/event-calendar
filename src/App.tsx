@@ -12,7 +12,6 @@ function App() {
     const menuBtn = document.getElementById("menu-icon") as HTMLButtonElement;
     const navBar = document.querySelector(".navbar") as HTMLElement;
     const calendarCtnr = document.querySelector(".calendar-ctnr") as HTMLDivElement;
-    let menuToggled = false;
 
     menuBtn.addEventListener("click", () => {
       if (toggled === false) {
