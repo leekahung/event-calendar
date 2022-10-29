@@ -16,7 +16,7 @@ body {
   font-size: 1.6rem;
 }
 
-div {
+div, #dialog-content {
   display: flex;
   justify-content: center;
   align-items: center;
