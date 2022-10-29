@@ -10,17 +10,11 @@ function App() {
 
   const handleClick = () => {
     const menuBtn = document.getElementById("menu-icon") as HTMLButtonElement;
-    const navBar = document.querySelector(".navbar") as HTMLElement;
-    const calendarCtnr = document.querySelector(".calendar-ctnr") as HTMLDivElement;
 
     menuBtn.addEventListener("click", () => {
       if (toggled === false) {
-        navBar.style.width = "0";
-        calendarCtnr.style.width = "100%";
         setToggled(true);
       } else {
-        navBar.style.width = "20%";
-        calendarCtnr.style.width = "80%";
         setToggled(false);
       }
     })
@@ -28,11 +22,9 @@ function App() {
 
   return (
     <div className="App">
-      <nav className="navbar">
-        <button id="menu-icon" onClick={handleClick}>
-          <img src={menuIcon} alt="burger menu icon" />
-        </button>
-      </nav>
+      <button id="menu-icon" onClick={handleClick}>
+        <img src={menuIcon} alt="burger menu icon" />
+      </button>
       <Calendar date={today}/>
     </div>
   );

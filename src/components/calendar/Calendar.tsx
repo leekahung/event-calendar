@@ -53,6 +53,11 @@ const Calendar = ({date}: Props) => {
     let daysInCurrMonth = daysInMonth(currYear, currMonthIndex + 1);
     let firstDayCurrMonth = getFirstDayIndex();
 
+    const reloadInitialDate = () => {
+      setCountMonth(0);
+      setCountYear(0);
+    }
+
     // Setting State Hook and Handler for Date Selection
     const [day, setDay] = useState(1);
 
@@ -79,6 +84,7 @@ const Calendar = ({date}: Props) => {
   return (
     <div className="calendar-ctnr">
       <div className="calendar-month-year">
+        <button id="reload-today" onClick={() => {reloadInitialDate();}}>Today</button>
         <button onClick={() => {handleCountMonth("down");}}>	
           &#9664;
         </button>

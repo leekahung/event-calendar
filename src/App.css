@@ -21,14 +21,6 @@ body {
   display: flex;
 }
 
-/* Navigation Section */
-
-.navbar {
-  width: 20%;
-  background-color: grey;
-  transition: 0.4s;
-}
-
 #menu-icon, #menu-icon img {
   width: 40px;
   height: 40px;
@@ -43,6 +35,7 @@ body {
   cursor: pointer;
   background-color: transparent;
   border: none;
+  z-index: 1;
 }
 
 /* Calendar Section */
@@ -54,25 +47,35 @@ body {
 }
 
 .calendar-ctnr {
-  width: 80%;
+  width: 100%;
+  height: 100%;
   background-color: lightgrey;
   flex-direction: column;
-  gap: 40px;
   transition: 0.4s;
+  position: relative;
 }
 
 .calendar-month-year {
   text-align: center;
-  gap: 50px;
+  width: 90%;
+  position: relative;
+  margin: 20px;
 }
 
 .calendar-month-year h1 {
-  width: 300px;
+  width: max(300px, 30%);
 }
 
 .calendar-month-year button {
   width: 40px;
   height: 40px;
+}
+
+#reload-today {
+  position: absolute;
+  left: 5%;
+  width: 60px;
+  font-size: 1.6rem;
 }
 
 .calendar-grid {
@@ -84,6 +87,7 @@ body {
   grid-template-rows: 40px repeat(6, 1fr);
   background-color: grey;
   gap: 1px;
+  margin: 20px;
 }
 
 .day-name {
@@ -124,6 +128,7 @@ body {
   height: 100%;
   display: flex;
   padding: 10px;
+  position: relative;
 }
 
 #dialog-box {
@@ -150,4 +155,22 @@ body {
 
 .btn-grp > button {
   padding: 5px 15px;
+}
+
+/* Repsonsive */
+@media (max-width: 768px) {
+  .calendar-month-year {
+    margin: 20px 0 0 0;
+  }
+
+  .calendar-month-year h1 {
+    font-size: 2.4rem;
+    width: 200px;
+  }
+
+  .calendar-grid {
+    width: 100%;
+    height: 100%;
+    margin: 20px 0 0 0;
+  }
 }
