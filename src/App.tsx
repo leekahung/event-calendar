@@ -4,9 +4,8 @@ import Calendar from "./components/calendar/Calendar";
 import menuIcon from "./assets/img/menu.png"
 
 function App() {
-  const clientHeight = document.documentElement.clientHeight;
   const appBody = document.body;
-  appBody.style.height = String(clientHeight);
+  appBody.style.height = String(window.innerHeight);
 
   const today = new Date();
 
