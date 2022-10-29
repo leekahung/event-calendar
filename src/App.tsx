@@ -4,6 +4,10 @@ import Calendar from "./components/calendar/Calendar";
 import menuIcon from "./assets/img/menu.png"
 
 function App() {
+  const clientHeight = document.documentElement.clientHeight;
+  const appBody = document.body;
+  appBody.style.height = String(clientHeight);
+
   const today = new Date();
 
   const [toggled, setToggled] = useState(false);
