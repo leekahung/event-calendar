@@ -4,8 +4,13 @@ import Calendar from "./components/calendar/Calendar";
 import menuIcon from "./assets/img/menu.png"
 
 function App() {
-  const appBody = document.body;
-  appBody.style.height = String(window.innerHeight);
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+
+  window.addEventListener("resize", () => {
+    vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  })
 
   const today = new Date();
 
