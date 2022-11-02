@@ -5,10 +5,16 @@ const Sidebar = () => {
   const [toggled, setToggled] = useState(false);
 
   const handleClick = () => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
     const sidebar = document.getElementById("sidebar") as HTMLDivElement;
+    let sidebarWidth: string = "20%";
+
+    if (mediaQuery.matches) {
+      sidebarWidth = "60%";
+    }
 
     if (toggled === false) {
-      sidebar.style.width = "20%";
+      sidebar.style.width = sidebarWidth;
       sidebar.style.opacity = "1";
       setToggled(true);
     } else {
