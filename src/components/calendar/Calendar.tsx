@@ -63,7 +63,7 @@ const Calendar = ({date}: Props) => {
 
     const handleButtonClick = (event: React.MouseEvent, day: number) => {
       setDay(day);
-    }
+    };
 
     // Helper function to populate calendar dynamically
     const createDay = (
@@ -98,17 +98,18 @@ const Calendar = ({date}: Props) => {
           return React.createElement("div", { className: "day-name", key: item }, item);
         })}
         {[...Array(42)].map((_, index) => {
+          const normalizedIndex = index - firstDayCurrMonth + 1;
           if (index === firstDayCurrMonth) {
-            if (date.getFullYear() === currYear && date.getMonth() === currMonthIndex && date.getDate() === firstDayCurrMonth + 1) {
-              return createDay("day first-day today", index, index - firstDayCurrMonth + 1);
+            if (date.getFullYear() === currYear && date.getMonth() === currMonthIndex && date.getDate() === normalizedIndex) {
+              return createDay("day first-day today", index, normalizedIndex);
             } else {
-              return createDay("day first-day", index, index - firstDayCurrMonth + 1);
+              return createDay("day first-day", index, normalizedIndex);
             }
           } else if (firstDayCurrMonth < index && index < firstDayCurrMonth + daysInCurrMonth) {
-            if (date.getFullYear() === currYear && date.getMonth() === currMonthIndex && date.getDate() === index - firstDayCurrMonth + 1) {
-              return createDay("day today", index, index - firstDayCurrMonth + 1);
+            if (date.getFullYear() === currYear && date.getMonth() === currMonthIndex && date.getDate() === normalizedIndex) {
+              return createDay("day today", index, normalizedIndex);
             } else {
-              return createDay("day", index, index - firstDayCurrMonth + 1);
+              return createDay("day", index, normalizedIndex);
             }
           } else {
             return createDay("day empty", index);

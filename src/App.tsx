@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import Calendar from "./components/calendar/Calendar";
-import menuIcon from "./assets/img/menu.png"
+import Sidebar from "./components/sidebar/Sidebar";
 
 function App() {
   let vh = window.innerHeight * 0.01;
@@ -14,25 +14,9 @@ function App() {
 
   const today = new Date();
 
-  const [toggled, setToggled] = useState(false);
-
-  const handleClick = () => {
-    const menuBtn = document.getElementById("menu-icon") as HTMLButtonElement;
-
-    menuBtn.addEventListener("click", () => {
-      if (toggled === false) {
-        setToggled(true);
-      } else {
-        setToggled(false);
-      }
-    })
-  }
-
   return (
     <div className="App">
-      <button id="menu-icon" onClick={handleClick}>
-        <img src={menuIcon} alt="burger menu icon" />
-      </button>
+      <Sidebar />
       <Calendar date={today}/>
     </div>
   );

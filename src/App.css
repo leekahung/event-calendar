@@ -11,6 +11,7 @@ html {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 62.5%;
   height: 100vh;
+  color: rgb(45, 55, 55);
 }
 
 body {
@@ -51,6 +52,38 @@ button {
   background-color: transparent;
   border: none;
   z-index: 1;
+}
+
+/* Sidebar Section */
+#sidebar {
+  width: 0%;
+  height: 100%;
+  background-color: rgb(240, 240, 240);
+  position: relative;
+  opacity: 1;
+  transition:
+    width 0.4s,
+    opacity 0.2s;
+}
+
+#logged-events-ctnr {
+  flex-direction: column;
+  justify-content: flex-start;
+  top: 80px;
+  width: 90%;
+  height: 100%;
+  gap: 10px;
+  position: absolute;
+}
+
+.event-ctnr {
+  border: 1px solid rgb(45, 55, 55);
+  height: 10%;
+  width: 90%;
+}
+
+.event-ctnr:hover {
+  background-color: rgb(150, 200, 255);
 }
 
 /* Calendar Section */
