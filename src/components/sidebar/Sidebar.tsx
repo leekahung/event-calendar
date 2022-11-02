@@ -7,6 +7,7 @@ const Sidebar = () => {
   const handleClick = () => {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
     const sidebar = document.getElementById("sidebar") as HTMLDivElement;
+    const loggedEventsCtnr = document.getElementById("logged-events-ctnr") as HTMLDivElement;
     let sidebarWidth: string = "20%";
 
     if (mediaQuery.matches) {
@@ -16,10 +17,12 @@ const Sidebar = () => {
     if (toggled === false) {
       sidebar.style.width = sidebarWidth;
       sidebar.style.opacity = "1";
+      loggedEventsCtnr.style.opacity = "1";
       setToggled(true);
     } else {
       sidebar.style.width = "0%";
       sidebar.style.opacity = "0";
+      loggedEventsCtnr.style.opacity = "0";
       setToggled(false);
     }
   }
