@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import data from "../../database.json";
 
 interface Props {
   month: string,
