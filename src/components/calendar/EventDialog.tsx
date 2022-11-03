@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 interface Props {
   month: string,
@@ -11,11 +11,11 @@ const EventDialog = ({ month, year, date, addEvent } : Props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleSubmit = (event: React.MouseEvent<HTMLFormElement>) => {
+  const handleSubmit = () => {
     addEvent(title, description);
   }
 
-  const handleButtonClose = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleButtonClose = () => {
     const dialogBox = document.getElementById("dialog-box") as HTMLDialogElement;
     dialogBox.open = false;
   }
