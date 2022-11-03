@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface Props {
   month: string,
   year: number,
-  date: number
+  date: number,
+  addEvent: any;
 }
 
-const EventDialog = ({ month, year, date } : Props) => {
+const EventDialog = ({ month, year, date, addEvent } : Props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  
+
   const handleSubmit = (event: React.MouseEvent<HTMLFormElement>) => {
-    return;
+    addEvent(title, description);
   }
 
   const handleButtonClose = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -21,12 +22,11 @@ const EventDialog = ({ month, year, date } : Props) => {
 
   return (
     <>
-      <form method="dialog" id="dialog-content" onSubmit={handleSubmit} noValidate>
+      <form method="dialog" id="dialog-content" onSubmit={handleSubmit}>
         <label>Add Event for {month} {date}, {year}?</label>
         <label>Event Title:</label>
         <input
           type="text"
-          required
           value={title}
           onChange={(event) => setTitle(event.target.value)}
         />

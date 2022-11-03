@@ -4,9 +4,10 @@ import EventDialog from "./EventDialog";
 
 interface Props {
   date: Date;
+  addEvent: any;
 }
 
-const Calendar = ({date}: Props) => {
+const Calendar = ({ date, addEvent }: Props) => {
     /* JavaScript Modulo Function Implementation */
     const mod = (a: number, b: number) => {
       return ((a % b) + b) % b;
@@ -121,6 +122,7 @@ const Calendar = ({date}: Props) => {
           month={currMonth}
           year={currYear}
           date={day}
+          addEvent={addEvent}
         />
       </dialog>
     </div>

@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 import menuIcon from "../../assets/img/menu.png";
-import data from "../../database.json";
+import EventList from "./EventList";
 
-const Sidebar = () => {
+interface Events {
+  id: string,
+  title: string, 
+  description: string
+}
+
+interface Props {
+  events: Events[]
+}
+
+const Sidebar = ({ events }: Props) => {
   const [toggled, setToggled] = useState(false);
 
   const handleClick = () => {
@@ -35,19 +45,7 @@ const Sidebar = () => {
       </button>
       <div id="sidebar">
         <div id="logged-events-ctnr">
-          {data.events.map((event) => (
-            <button className="event-ctnr" key={event.id}>
-              <div className="event-date">
-                {event.date}
-              </div>
-              <div className="event-title">
-                {event.title}
-              </div>
-              <div className="event-desc">
-                {event.description}
-              </div>
-            </button>
-          ))}
+          <EventList events={events}/>
         </div>
       </div>
     </>
