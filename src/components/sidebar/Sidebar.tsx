@@ -28,8 +28,6 @@ const Sidebar = () => {
     }
   }
 
-  const [eventData, setEventData] = useState(data);
-
   return (
     <>
       <button id="menu-icon" onClick={handleClick}>
@@ -37,10 +35,17 @@ const Sidebar = () => {
       </button>
       <div id="sidebar">
         <div id="logged-events-ctnr">
-          {eventData.map((event) => (
+          {data.events.map((event) => (
             <button className="event-ctnr" key={event.id}>
-              <div className="event-title">{event.title}</div>
-              <div className="event-desc">{event.description}</div>
+              <div className="event-date">
+                {event.date}
+              </div>
+              <div className="event-title">
+                {event.title}
+              </div>
+              <div className="event-desc">
+                {event.description}
+              </div>
             </button>
           ))}
         </div>
