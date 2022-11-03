@@ -3,7 +3,7 @@ import menuIcon from "../../assets/img/menu.png";
 import EventList from "./EventList";
 
 interface Props {
-  events: Events[]
+  events: Events[];
 }
 
 const Sidebar = ({ events }: Props) => {

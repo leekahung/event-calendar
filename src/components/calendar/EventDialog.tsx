@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 
 interface Props {
-  month: string,
-  year: number,
-  date: number,
-  addEvent: any;
+  month: string;
+  year: number;
+  date: number;
+  addEvent: (
+    title: string,
+    date: string,
+    description: string
+  ) => void;
 }
 
 const EventDialog = ({ month, year, date, addEvent } : Props) => {
@@ -16,7 +20,7 @@ const EventDialog = ({ month, year, date, addEvent } : Props) => {
   }
   const dialogBox = document.getElementById("dialog-box") as HTMLDialogElement;
 
-  const handleSubmit = (event: React.MouseEvent<HTMLFormElement>) => {
+  const handleSubmit = () => {
     addEvent(title, `${month} ${date}, ${year}`, description);
     const dialogBox = document.getElementById("dialog-box") as HTMLDialogElement;
     dialogBox.open = false;

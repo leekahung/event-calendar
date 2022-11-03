@@ -4,7 +4,11 @@ import EventDialog from "./EventDialog";
 
 interface Props {
   date: Date;
-  addEvent: any;
+  addEvent: (
+    title: string,
+    date: string,
+    description: string
+  ) => void;
 }
 
 const Calendar = ({ date, addEvent }: Props) => {
@@ -35,14 +39,14 @@ const Calendar = ({ date, addEvent }: Props) => {
 
     const handleCountMonth = (direction: string) => {
       if (direction === "up") {
-        setCountMonth(countMonth => {return countMonth + 1});
+        setCountMonth(countMonth + 1);
         if (currMonth === "December") {
-          setCountYear(countYear => {return countYear + 1});
+          setCountYear(countYear + 1);
         }; 
       } else {
-        setCountMonth(countMonth => {return countMonth - 1});
+        setCountMonth(countMonth - 1);
         if (currMonth === "January") {
-          setCountYear(countYear => {return countYear - 1});
+          setCountYear(countYear - 1);
         };
       }
     }
@@ -62,9 +66,13 @@ const Calendar = ({ date, addEvent }: Props) => {
     // Setting State Hook and Handler for Date Selection
     const [day, setDay] = useState(1);
 
-    const handleButtonClick = (event: React.MouseEvent, day: number) => {
+    const handleButtonClick = (day: number) => {
       setDay(day);
     };
+
+    const handleDaySelect = (day: number) => {
+      handleButtonClick(day);
+    }
 
     // Helper function to populate calendar dynamically
     const createDay = (
@@ -76,7 +84,7 @@ const Calendar = ({ date, addEvent }: Props) => {
         ? (React.createElement("div", { className: classNames, key: keyIndex },
           <AddEventButton
             dateValue={dateValue}
-            handleDaySelect={(event: React.MouseEvent, day: number) => handleButtonClick(event, day)} 
+            handleDaySelect={handleDaySelect} 
           />
           ))
         : (React.createElement("div", { className: classNames, key: keyIndex }));

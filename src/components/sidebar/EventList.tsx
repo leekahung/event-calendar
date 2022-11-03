@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-  events: Events[]
+  events: Events[];
 }
 
 const EventList = ({ events }: Props) => {
