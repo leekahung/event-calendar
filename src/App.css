@@ -75,6 +75,8 @@ button {
   height: 100%;
   gap: 10px;
   position: absolute;
+  transition:
+    opacity 1s;
 }
 
 .event-ctnr {

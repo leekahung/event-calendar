@@ -2,12 +2,6 @@ import React, { useState } from "react";
 import menuIcon from "../../assets/img/menu.png";
 import EventList from "./EventList";
 
-interface Events {
-  id: string,
-  title: string, 
-  description: string
-}
-
 interface Props {
   events: Events[]
 }

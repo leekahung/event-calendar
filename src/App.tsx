@@ -16,19 +16,22 @@ function App() {
     {
       id: "1",
       title: "New Event 1",
+      date: "November 1, 2022",
       description: "Event 1 description"
     },
     {
       id: "2",
       title: "New Event 2",
+      date: "November 2, 2022",
       description: "Event 2 description"
     }
   ]);
 
-  const addEvent = (title: string, description: string) => {
+  const addEvent = (title: string, date: string, description: string) => {
     setEvents([...events, {
       id: String(events.length + 1),
       title: title,
+      date: date,
       description: description
     }])
   };

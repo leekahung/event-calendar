@@ -12,8 +12,14 @@ const Calendar = ({ date, addEvent }: Props) => {
     const mod = (a: number, b: number) => {
       return ((a % b) + b) % b;
     }
+
+    const month: string[] = [
+      "January", "Feburary", "March", "April",
+      "May", "June", "July", "August",
+      "September", "October", "November", "December"
+    ];
   
-    /* Helper functions to populate calendar */
+    /* Helper functions to help set initial values for calendar */
     const daysInMonth = (year: number, monthIndex: number) => {
       return new Date(year, monthIndex, 0).getDate();
     }
@@ -22,12 +28,6 @@ const Calendar = ({ date, addEvent }: Props) => {
       let dayIndex = new Date(currYear, currMonthIndex, 0).getDay() + 1;
       return (dayIndex === 7) ? 0 : dayIndex;
     }
-  
-    const month: string[] = [
-      "January", "Feburary", "March", "April",
-      "May", "June", "July", "August",
-      "September", "October", "November", "December"
-    ];
   
     // Set State Hooks and Handler for changing Month and Year
     const [countMonth, setCountMonth] = useState(0);
