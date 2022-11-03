@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import menuIcon from "../../assets/img/menu.png"
+import menuIcon from "../../assets/img/menu.png";
+import data from "../../database.json";
 
 const Sidebar = () => {
   const [toggled, setToggled] = useState(false);
@@ -27,6 +28,8 @@ const Sidebar = () => {
     }
   }
 
+  const [eventData, setEventData] = useState(data);
+
   return (
     <>
       <button id="menu-icon" onClick={handleClick}>
@@ -34,10 +37,12 @@ const Sidebar = () => {
       </button>
       <div id="sidebar">
         <div id="logged-events-ctnr">
-          <button className="event-ctnr">Event 1</button>
-          <button className="event-ctnr">Event 2</button>
-          <button className="event-ctnr">Event 3</button>
-          <button className="event-ctnr">Event 4</button>
+          {eventData.map((event) => (
+            <button className="event-ctnr" key={event.id}>
+              <div className="event-title">{event.title}</div>
+              <div className="event-desc">{event.description}</div>
+            </button>
+          ))}
         </div>
       </div>
     </>
