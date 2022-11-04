@@ -36,15 +36,6 @@ const EventDialog = ({ month, year, date } : Props) => {
     handleClose();
   }
 
-  window.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      if (dialogBox) {
-        event.preventDefault();
-        handleClose();
-      }
-    }
-  })
-
   return (
     <>
       <form
