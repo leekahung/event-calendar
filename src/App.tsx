@@ -1,7 +1,18 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import "./App.css";
 import Calendar from "./components/calendar/Calendar";
 import Sidebar from "./components/sidebar/Sidebar";
+
+export type AddEventContextType = {
+  addEvent: (
+    title: string,
+    date: string,
+    description: string
+  ) => void;
+}
+
+export const EventContext = createContext<Events[]>([]);
+export const AddEventContext = createContext<AddEventContextType>({} as AddEventContextType);
 
 function App() {
   let vh = window.innerHeight * 0.01;
@@ -38,8 +49,12 @@ function App() {
 
   return (
     <div className="App">
-      <Sidebar events={events} />
-      <Calendar date={today} addEvent={addEvent}/>
+      <EventContext.Provider value={events}>
+        <Sidebar />
+      </EventContext.Provider>
+      <AddEventContext.Provider value={{addEvent}}>
+        <Calendar date={today} />
+      </AddEventContext.Provider>
     </div>
   );
 }

@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AddEventContext, AddEventContextType } from "../../App";
 
 interface Props {
   month: string;
   year: number;
   date: number;
-  addEvent: (
-    title: string,
-    date: string,
-    description: string
-  ) => void;
 }
 
-const EventDialog = ({ month, year, date, addEvent } : Props) => {
+const EventDialog = ({ month, year, date } : Props) => {
+  const { addEvent } = useContext(AddEventContext) as AddEventContextType;
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const resetForm = () => {

@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import menuIcon from "../../assets/img/menu.png";
 import EventList from "./EventList";
 
-interface Props {
-  events: Events[];
-}
-
-const Sidebar = ({ events }: Props) => {
+const Sidebar = () => {
   const [toggled, setToggled] = useState(false);
 
   const handleClick = () => {
@@ -39,7 +35,7 @@ const Sidebar = ({ events }: Props) => {
       </button>
       <div id="sidebar">
         <div id="logged-events-ctnr">
-          <EventList events={events}/>
+          <EventList />
         </div>
       </div>
     </>

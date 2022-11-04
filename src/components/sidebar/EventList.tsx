@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { EventContext } from "../../App";
 
-interface Props {
-  events: Events[];
-}
+const EventList = () => {
+  const events = useContext(EventContext);
 
-const EventList = ({ events }: Props) => {
   return (
     <>
       {events.map((event) => (
