@@ -45,7 +45,7 @@ const Calendar = ({ date }: Props) => {
         };
       }
     }
-  
+
     // Initial Settings for Calender values
     let currYear = date.getFullYear() + countYear;
     let currMonthIndex = mod((date.getMonth() + countMonth), 12);
@@ -89,13 +89,15 @@ const Calendar = ({ date }: Props) => {
     <div className="calendar-ctnr">
       <div className="calendar-month-year">
         <button id="reload-today" onClick={() => {reloadInitialDate();}}>Today</button>
-        <button onClick={() => {handleCountMonth("down");}}>	
-          &#9664;
-        </button>
-        <h1>{`${currMonth} ${currYear}`}</h1>
-        <button onClick={() => {handleCountMonth("up");}}>
-          &#9654;
-        </button>
+        <div id="month-year">
+          <button onClick={() => {handleCountMonth("down");}}>	
+            &#9664;
+          </button>
+          <h1>{`${currMonth} ${currYear}`}</h1>
+          <button onClick={() => {handleCountMonth("up");}}>
+            &#9654;
+          </button>
+        </div>
       </div>
       <div className="calendar-grid">
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((item) => {

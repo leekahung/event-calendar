@@ -15,13 +15,13 @@ html {
 }
 
 body {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   height: 100%;
   height: calc(var(--vh, 1vh) * 100);
   position: relative;
 }
 
-div, #dialog-content {
+div, #dialog-content{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -107,13 +107,18 @@ button {
   margin: 20px;
 }
 
-.calendar-month-year h1 {
-  width: max(300px, 30%);
-}
-
 .calendar-month-year button {
   width: 40px;
   height: 40px;
+}
+
+#month-year {
+  height: 40px;
+  width: max(400px, 30%);
+}
+
+#month-year h1 {
+  width: 300px;
 }
 
 #reload-today {
@@ -209,19 +214,21 @@ button {
     z-index: 1;
   }
 
+  #month-year {
+    width: 350px;
+  }
+
   #reload-today {
-    position: unset;
-    margin: 0 0 0 50px;
+    left: 50px;
   }
 
   .calendar-month-year {
     margin: 20px 0 0 0;
-    justify-content: space-around;
   }
 
-  .calendar-month-year h1 {
-    font-size: 2.4rem;
+  #month-year h1 {
     width: 200px;
+    font-size: 2.4rem;
   }
 
   .calendar-grid {
@@ -231,8 +238,39 @@ button {
   }
 }
 
+@media (max-width: 600px) {
+  #month-year {
+    justify-content: flex-end;
+    margin: 0 auto;
+  } 
+}
+
 @media (max-width: 480px) {
-  .calendar-month-year h1 {
-    font-size: 2rem;
+  #month-year h1 {
+    width: 140px;
+    font-size: 1.6rem;
+  }
+
+  .calendar-month-year button {
+    height: 35px;
+  }
+
+  #month-year {
+    height: 40px;
+  }
+
+  #month-year button {
+    width: 25px;
+  }
+
+  #menu-icon {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 400px) {
+  #month-year {
+    margin: 0 auto;
   }
 }
