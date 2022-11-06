@@ -33,83 +33,48 @@ button {
 
 .App {
   background-color: rgb(240 , 240, 240);
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  inset: 0;
-}
-
-/* Menu Icon */
-
-#menu-icon, #menu-icon img {
-  width: 40px;
-  height: 40px;
-}
-
-#menu-icon {
-  position: fixed;
-  inset: 20px 0 0 20px;
-  background-color: transparent;
-  border: none;
-  z-index: 2;
-}
-
-/* Sidebar Section */
-#sidebar {
-  width: 0%;
-  height: 100%;
-  background-color: rgb(240, 240, 240);
-  position: relative;
-  opacity: 1;
-  transition:
-    width 0.4s,
-    opacity 0.2s;
-}
-
-#logged-events-ctnr {
-  flex-direction: column;
-  justify-content: flex-start;
-  opacity: 0;
-  top: 80px;
-  width: 90%;
-  height: 100%;
-  gap: 10px;
-  position: absolute;
-  transition:
-    opacity 1s;
-}
-
-.event-ctnr {
-  border: 1px solid rgb(45, 55, 55);
-  height: 10%;
-  width: 90%;
-}
-
-.event-ctnr:hover {
-  background-color: rgb(150, 200, 255);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
 }
 
 /* Calendar Section */
 
 .calendar-ctnr {
-  width: 100%;
+  width: 70%;
   height: 100%;
   background-color: lightgrey;
   flex-direction: column;
   transition: 0.4s;
-  position: relative;
 }
 
 .calendar-month-year {
   text-align: center;
   width: 90%;
   position: relative;
-  margin: 20px;
+  gap: 20px;  
 }
 
 .calendar-month-year button {
   width: 40px;
   height: 40px;
+  border: none;
+  background-color: transparent;
+  border: 1px solid rgb(45, 55, 55);
+  border-radius: 20px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#month-year button {
+  border: none;
+}
+
+.calendar-month-year button img {
+  width: 100%;
+  height: 100%;
 }
 
 #month-year {
@@ -122,8 +87,6 @@ button {
 }
 
 #reload-today {
-  position: absolute;
-  left: 5%;
   width: 60px;
   font-size: 1.6rem;
 }
@@ -161,57 +124,65 @@ button {
   background-color: rgb(180, 180, 180);
 }
 
-.day:hover, .day.today:hover {
-  background-color: rgb(150, 200, 255);
-}
-
-.day.today {
-  background-color: pink;
-}
-
 .day.empty {
   pointer-events: none;
 }
 
 .day > button {
+  width: 100%;
+  height: 100%;
   border: none;
   background-color: transparent;
-  font-size: 1.6rem;
-  width: 100%;
-  height: 100%;
   display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
   padding: 10px;
-  position: relative;
 }
 
-#dialog-box {
-  position: fixed;
-  margin: 0 auto;
-  width: 300px;
-  height: 300px;
+.day > button > p {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  border-radius: 50%;
 }
 
-#dialog-content {
-  width: 100%;
+.day.day-selected > button > p {
+  background-color: lightblue;
+}
+
+/* Event Section */
+.event-bar {
+  width: max(300px, 30%);
   height: 100%;
-  flex-direction: column;
-  gap: 20px;
+  background-color: rgb(240 , 240, 240);
+  transition: 0.4s;
 }
 
-.btn-grp {
-  gap: 20px;
-}
-
-.btn-grp > button {
-  padding: 5px 15px;
+/* Hover Effects */
+@media (hover: hover) and (pointer: fine) {
+  .day:hover {
+    background-color: rgb(130, 168, 202);
+  }
 }
 
 /* Repsonsive */
-@media (max-width: 768px) {
-  #sidebar {
-    position: fixed;
-    left: 0;
-    z-index: 1;
+@media (max-width: 1080px) {
+  .App {
+    flex-direction: column;
+    transition: 0.4s;
+  }
+
+  .calendar-ctnr {
+    width: 100%;
+  }
+
+  .calendar-grid {
+    width: 100%;
+    height: 100%;
+    margin: 20px 0 0 0;
   }
 
   #month-year {
@@ -231,46 +202,45 @@ button {
     font-size: 2.4rem;
   }
 
-  .calendar-grid {
-    width: 100%;
-    height: 100%;
-    margin: 20px 0 0 0;
+  .day > button {
+    padding: 5px;
   }
-}
 
-@media (max-width: 600px) {
-  #month-year {
-    justify-content: flex-end;
-    margin: 0 auto;
-  } 
+  .day > button > p {
+    width: 20px;
+    height: 20px;
+    font-size: 1.2rem;
+  }
 }
 
 @media (max-width: 480px) {
+  .calendar-month-year {
+    gap: 0;
+  }
+
+  #reload-today {
+    height: 30px;
+    font-size: 1.2rem;
+  }
+
   #month-year h1 {
-    width: 140px;
+    width: 120px;
     font-size: 1.6rem;
   }
-
-  .calendar-month-year button {
-    height: 35px;
+/*   .calendar-month-year button {
+    height: 30px;
   }
 
-  #month-year {
-    height: 40px;
+  #reload-today {
+    font-size: 1.2rem;
   }
 
   #month-year button {
-    width: 25px;
+    width: 30px;
   }
 
-  #menu-icon {
-    width: 35px;
-    height: 35px;
-  }
-}
-
-@media (max-width: 400px) {
-  #month-year {
-    margin: 0 auto;
-  }
+  #month-year h1 {
+    width: 160px;
+    font-size: 2rem;
+  } */
 }

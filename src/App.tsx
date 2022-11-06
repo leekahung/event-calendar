@@ -1,18 +1,17 @@
 import React, { createContext, useState } from "react";
 import "./App.css";
 import Calendar from "./components/calendar/Calendar";
-import Sidebar from "./components/sidebar/Sidebar";
 
-export type AddEventContextType = {
-  addEvent: (
-    title: string,
-    date: string,
-    description: string
+/* useContext hook for Selecting Specific Dates */
+export type SelectDayContextType = {
+  selectedDate: (
+    selectedMonth: string,
+    selectedDay: number,
+    selectedYear: string
   ) => void;
-}
+};
 
-export const EventContext = createContext<Events[]>([]);
-export const AddEventContext = createContext<AddEventContextType>({} as AddEventContextType);
+export const SelectDayContext = createContext<SelectDayContextType>({} as SelectDayContextType);
 
 function App() {
   let vh = window.innerHeight * 0.01;
@@ -23,38 +22,36 @@ function App() {
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   })
 
-  const [events, setEvents] = useState<Events[]>([
-    {
-      id: "0",
-      title: "Test Event",
-      date: "November 30, 2022",
-      description: "This is a test"
-    }
-  ]);
-
-  const addEvent = (
-    title: string,
-    date: string,
-    description: string
-  ) => {
-    setEvents([...events, {
-      id: String(events.length + 1),
-      title: title,
-      date: date,
-      description: description
-    }])
-  };
+  const month: string[] = [
+    "January", "Feburary", "March", "April",
+    "May", "June", "July", "August",
+    "September", "October", "November", "December"
+  ];
 
   const today = new Date();
+  
+  const [selectedMonth, setSelectedMonth] = useState(month[today.getMonth()]);
+  const [selectedDay, setSelectedDay] = useState(today.getDate());
+  const [selectedYear, setSelectedYear] = useState(String(today.getFullYear()));
+
+  const selectedDate = (
+    selectedMonth: string,
+    selectedDay: number,
+    selectedYear: string
+  ) => {
+    setSelectedMonth(selectedMonth);
+    setSelectedDay(selectedDay);
+    setSelectedYear(selectedYear);
+  };
 
   return (
     <div className="App">
-      <EventContext.Provider value={events}>
-        <Sidebar />
-      </EventContext.Provider>
-      <AddEventContext.Provider value={{addEvent}}>
-        <Calendar date={today} />
-      </AddEventContext.Provider>
+      <SelectDayContext.Provider value={{selectedDate}}>
+        <Calendar date={today} month={month}/>
+      </SelectDayContext.Provider>
+      <div className="event-bar">
+        {selectedMonth} {selectedDay}, {selectedYear}
+      </div>
     </div>
   );
 }

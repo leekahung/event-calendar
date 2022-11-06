@@ -1,22 +1,19 @@
-import React, { useState } from "react";
-import AddEventButton from "./AddEventButton";
-import EventDialog from "./EventDialog";
+import React, { useContext, useState } from "react";
+import SelectDayButton from "./SelectDayButton";
+import leftCheveron from "../../assets/img/left-chevron.png";
+import rightCheveron from "../../assets/img/right-chevron.png";
+import { SelectDayContext, SelectDayContextType } from "../../App";
 
 interface Props {
   date: Date;
+  month: string[];
 }
 
-const Calendar = ({ date }: Props) => {
+const Calendar = ({ date, month }: Props) => {
     /* JavaScript Modulo Function Implementation */
     const mod = (a: number, b: number) => {
       return ((a % b) + b) % b;
     }
-
-    const month: string[] = [
-      "January", "Feburary", "March", "April",
-      "May", "June", "July", "August",
-      "September", "October", "November", "December"
-    ];
   
     /* Helper functions to help set initial values for calendar */
     const daysInMonth = (year: number, monthIndex: number) => {
@@ -33,11 +30,13 @@ const Calendar = ({ date }: Props) => {
     const [countYear, setCountYear] = useState(0);
 
     const handleCountMonth = (direction: string) => {
+      const calendarDays = document.querySelectorAll<HTMLDivElement>(".day");
+      calendarDays.forEach(day => removeSelected(day));
       if (direction === "up") {
         setCountMonth(countMonth + 1);
         if (currMonth === "December") {
           setCountYear(countYear + 1);
-        }; 
+        };
       } else {
         setCountMonth(countMonth - 1);
         if (currMonth === "January") {
@@ -53,20 +52,29 @@ const Calendar = ({ date }: Props) => {
     let daysInCurrMonth = daysInMonth(currYear, currMonthIndex + 1);
     let firstDayCurrMonth = getFirstDayIndex();
 
+    const resetSelected = (day: HTMLDivElement) => {
+      if (day.classList.contains("today")) {
+        day.classList.add("day-selected");
+      }
+    }
+
+    const removeSelected = (day: HTMLDivElement) => {
+      if (day.classList.contains("day-selected")) {
+        day.classList.remove("day-selected");
+      }
+    };
+
+    const { selectedDate } = useContext(SelectDayContext) as SelectDayContextType;
+
     const reloadInitialDate = () => {
       setCountMonth(0);
       setCountYear(0);
-    }
-
-    // Setting State Hook and Handler for Date Selection
-    const [day, setDay] = useState(1);
-
-    const handleButtonClick = (day: number) => {
-      setDay(day);
-    };
-
-    const handleDaySelect = (day: number) => {
-      handleButtonClick(day);
+      const calendarDays = document.querySelectorAll<HTMLDivElement>(".day");
+      calendarDays.forEach(day => {
+        removeSelected(day);
+        resetSelected(day);
+      });
+      selectedDate(month[date.getMonth()], date.getDate(), String(date.getFullYear()));
     }
 
     // Helper function to populate calendar dynamically
@@ -76,12 +84,7 @@ const Calendar = ({ date }: Props) => {
       dateValue?: number
     ) => {
       return (typeof dateValue !== "undefined")
-        ? (React.createElement("div", { className: classNames, key: keyIndex },
-          <AddEventButton
-            dateValue={dateValue}
-            handleDaySelect={handleDaySelect} 
-          />
-          ))
+        ? (React.createElement("div", { className: classNames, key: keyIndex }, <SelectDayButton dateValue={dateValue} removeSelected={removeSelected}/>))
         : (React.createElement("div", { className: classNames, key: keyIndex }));
     };
 
@@ -91,11 +94,11 @@ const Calendar = ({ date }: Props) => {
         <button id="reload-today" onClick={() => {reloadInitialDate();}}>Today</button>
         <div id="month-year">
           <button onClick={() => {handleCountMonth("down");}}>	
-            &#9664;
+            <img src={leftCheveron} alt="left-pointing cheveron icon"/>
           </button>
           <h1>{`${currMonth} ${currYear}`}</h1>
           <button onClick={() => {handleCountMonth("up");}}>
-            &#9654;
+            <img src={rightCheveron} alt="right-pointing cheveron icon"/>
           </button>
         </div>
       </div>
@@ -107,13 +110,13 @@ const Calendar = ({ date }: Props) => {
           const normalizedIndex = index - firstDayCurrMonth + 1;
           if (index === firstDayCurrMonth) {
             if (date.getFullYear() === currYear && date.getMonth() === currMonthIndex && date.getDate() === normalizedIndex) {
-              return createDay("day first-day today", index, normalizedIndex);
+              return createDay("day first-day today day-selected", index, normalizedIndex);
             } else {
               return createDay("day first-day", index, normalizedIndex);
             }
           } else if (firstDayCurrMonth < index && index < firstDayCurrMonth + daysInCurrMonth) {
             if (date.getFullYear() === currYear && date.getMonth() === currMonthIndex && date.getDate() === normalizedIndex) {
-              return createDay("day today", index, normalizedIndex);
+              return createDay("day today day-selected", index, normalizedIndex);
             } else {
               return createDay("day", index, normalizedIndex);
             }
@@ -122,13 +125,6 @@ const Calendar = ({ date }: Props) => {
           }
         })}
       </div>
-      <dialog id="dialog-box">
-        <EventDialog 
-          month={currMonth}
-          year={currYear}
-          date={day}
-        />
-      </dialog>
     </div>
   );
 }
