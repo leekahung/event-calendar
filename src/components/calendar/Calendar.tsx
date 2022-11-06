@@ -32,15 +32,16 @@ const Calendar = ({ date, month }: Props) => {
     const handleCountMonth = (direction: string) => {
       const calendarDays = document.querySelectorAll<HTMLDivElement>(".day");
       calendarDays.forEach(day => removeSelected(day));
+
       if (direction === "up") {
-        setCountMonth(countMonth + 1);
+        setCountMonth((countMonth) => {return countMonth + 1});
         if (currMonth === "December") {
-          setCountYear(countYear + 1);
+          setCountYear((countYear) => {return countYear + 1});
         };
       } else {
-        setCountMonth(countMonth - 1);
+        setCountMonth((countMonth) => {return countMonth - 1});
         if (currMonth === "January") {
-          setCountYear(countYear - 1);
+          setCountYear((countYear) => {return countYear - 1});
         };
       }
     }
@@ -65,16 +66,16 @@ const Calendar = ({ date, month }: Props) => {
     };
 
     const { selectedDate } = useContext(SelectDayContext) as SelectDayContextType;
+    const calendarDays = document.querySelectorAll<HTMLDivElement>(".day"); 
 
     const reloadInitialDate = () => {
       setCountMonth(0);
       setCountYear(0);
-      const calendarDays = document.querySelectorAll<HTMLDivElement>(".day");
       calendarDays.forEach(day => {
         removeSelected(day);
         resetSelected(day);
       });
-      selectedDate(month[date.getMonth()], date.getDate(), String(date.getFullYear()));
+      selectedDate(month[date.getMonth()], date.getDate(), date.getFullYear());
     }
 
     // Helper function to populate calendar dynamically
@@ -101,6 +102,9 @@ const Calendar = ({ date, month }: Props) => {
             <img src={rightCheveron} alt="right-pointing cheveron icon"/>
           </button>
         </div>
+        <button id="add-event-btn" onClick={() => {console.log("add event")}}>
+          +
+        </button>
       </div>
       <div className="calendar-grid">
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((item) => {

@@ -14,7 +14,7 @@ const SelectDayButton = ({ dateValue, removeSelected }: Props) => {
     
     return {
       month: monthYearString[0],
-      year: monthYearString[1]
+      year: Number(monthYearString[1])
     }
   };
 
@@ -38,7 +38,7 @@ const SelectDayButton = ({ dateValue, removeSelected }: Props) => {
 
   return (
     <>
-      <button onClick={handleSelectDay} id={String(dateValue)}>
+      <button onClick={handleSelectDay}>
         <p>{dateValue}</p>
       </button>
     </>

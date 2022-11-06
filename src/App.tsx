@@ -7,7 +7,7 @@ export type SelectDayContextType = {
   selectedDate: (
     selectedMonth: string,
     selectedDay: number,
-    selectedYear: string
+    selectedYear: number
   ) => void;
 };
 
@@ -32,12 +32,12 @@ function App() {
   
   const [selectedMonth, setSelectedMonth] = useState(month[today.getMonth()]);
   const [selectedDay, setSelectedDay] = useState(today.getDate());
-  const [selectedYear, setSelectedYear] = useState(String(today.getFullYear()));
+  const [selectedYear, setSelectedYear] = useState(today.getFullYear());
 
   const selectedDate = (
     selectedMonth: string,
     selectedDay: number,
-    selectedYear: string
+    selectedYear: number
   ) => {
     setSelectedMonth(selectedMonth);
     setSelectedDay(selectedDay);
@@ -50,7 +50,14 @@ function App() {
         <Calendar date={today} month={month}/>
       </SelectDayContext.Provider>
       <div className="event-bar">
-        {selectedMonth} {selectedDay}, {selectedYear}
+        <div className="events-today">
+          <div className="events-today-header">{selectedMonth} {selectedDay}, {selectedYear}</div>
+          <div className="events-today-list">Placeholder</div>
+        </div>
+        <div className="events-all">
+          <div className="events-all-header">All Events</div>
+          <div className="events-all-list">Placeholder</div>
+        </div>
       </div>
     </div>
   );
