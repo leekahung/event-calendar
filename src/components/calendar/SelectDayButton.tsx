@@ -6,21 +6,21 @@ interface Props {
   removeSelected: (day: HTMLDivElement) => void;
 }
 
-const SelectDayButton = ({ dateValue, removeSelected }: Props) => {  
+const SelectDayButton = ({ dateValue, removeSelected }: Props) => {
   const { selectedDate } = useContext(SelectDayContext) as SelectDayContextType;
   const extractMonthYear = () => {
     const monthYear = document.querySelector("#month-year > h1") as HTMLDivElement;
     const monthYearString = String(monthYear.innerText).split(" ");
-    
+
     return {
       month: monthYearString[0],
-      year: Number(monthYearString[1])
-    }
+      year: Number(monthYearString[1]),
+    };
   };
 
   const handleSelectDay = (event: React.MouseEvent<HTMLButtonElement>) => {
     const calendarDays = document.querySelectorAll<HTMLDivElement>(".day");
-    calendarDays.forEach(day => removeSelected(day));
+    calendarDays.forEach((day) => removeSelected(day));
 
     const target = event.target as HTMLElement;
     if (target.nodeName === "BUTTON") {
@@ -34,7 +34,7 @@ const SelectDayButton = ({ dateValue, removeSelected }: Props) => {
     const { month, year } = extractMonthYear();
 
     selectedDate(month, dateValue, year);
-  }
+  };
 
   return (
     <>
@@ -43,6 +43,6 @@ const SelectDayButton = ({ dateValue, removeSelected }: Props) => {
       </button>
     </>
   );
-}
+};
 
 export default SelectDayButton;

@@ -11,7 +11,9 @@ export type SelectDayContextType = {
   ) => void;
 };
 
-export const SelectDayContext = createContext<SelectDayContextType>({} as SelectDayContextType);
+export const SelectDayContext = createContext<SelectDayContextType>(
+  {} as SelectDayContextType
+);
 
 function App() {
   let vh = window.innerHeight * 0.01;
@@ -20,7 +22,7 @@ function App() {
   window.addEventListener("resize", () => {
     vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
-  })
+  });
 
   const month: string[] = [
     "January", "Feburary", "March", "April",
@@ -29,7 +31,7 @@ function App() {
   ];
 
   const today = new Date();
-  
+
   const [selectedMonth, setSelectedMonth] = useState(month[today.getMonth()]);
   const [selectedDay, setSelectedDay] = useState(today.getDate());
   const [selectedYear, setSelectedYear] = useState(today.getFullYear());
@@ -46,12 +48,14 @@ function App() {
 
   return (
     <div className="App">
-      <SelectDayContext.Provider value={{selectedDate}}>
-        <Calendar date={today} month={month}/>
+      <SelectDayContext.Provider value={{ selectedDate }}>
+        <Calendar date={today} month={month} />
       </SelectDayContext.Provider>
       <div className="event-bar">
         <div className="events-today">
-          <div className="events-today-header">{selectedMonth} {selectedDay}, {selectedYear}</div>
+          <div className="events-today-header">
+            {selectedMonth} {selectedDay}, {selectedYear}
+          </div>
           <div className="events-today-list">Placeholder</div>
         </div>
         <div className="events-all">
