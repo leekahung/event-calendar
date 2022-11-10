@@ -43,7 +43,7 @@ button {
 
 /* Calendar Section */
 
-.calendar__ctnr {
+.calendar {
   width: 70%;
   height: 100%;
   background-color: lightgrey;
@@ -188,7 +188,7 @@ button {
     transition: 0.4s;
   }
 
-  .calendar__ctnr {
+  .calendar {
     width: 100%;
   }
 

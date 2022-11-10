@@ -109,7 +109,7 @@ const Calendar = ({ date, month }: Props) => {
   };
 
   return (
-    <div className="calendar__ctnr">
+    <div className="calendar">
       <div className="calendar__date-ctnr">
         <button
           className="calendar__reload-today"
