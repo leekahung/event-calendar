@@ -51,16 +51,16 @@ function App() {
       <SelectDayContext.Provider value={{ selectedDate }}>
         <Calendar date={today} month={month} />
       </SelectDayContext.Provider>
-      <div className="event-bar">
-        <div className="events-today">
-          <div className="events-today-header">
+      <div className="events">
+        <div className="events__today">
+          <div className="events__today-header">
             {selectedMonth} {selectedDay}, {selectedYear}
           </div>
-          <div className="events-today-list">Placeholder</div>
+          <div className="events__today-list">Placeholder</div>
         </div>
-        <div className="events-all">
-          <div className="events-all-header">All Events</div>
-          <div className="events-all-list">Placeholder</div>
+        <div className="events__all">
+          <div className="events__all-header">All Events</div>
+          <div className="events__all-list">Placeholder</div>
         </div>
       </div>
     </div>

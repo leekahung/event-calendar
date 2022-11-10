@@ -30,7 +30,7 @@ const Calendar = ({ date, month }: Props) => {
   const [countYear, setCountYear] = useState(0);
 
   const handleCountMonth = (direction: string) => {
-    const calendarDays = document.querySelectorAll<HTMLDivElement>(".day");
+    const calendarDays = document.querySelectorAll<HTMLDivElement>(".calendar__day");
     calendarDays.forEach((day) => removeSelected(day));
 
     if (direction === "up") {
@@ -63,18 +63,18 @@ const Calendar = ({ date, month }: Props) => {
 
   const resetSelected = (day: HTMLDivElement) => {
     if (day.classList.contains("today")) {
-      day.classList.add("day-selected");
+      day.classList.add("calendar__day-selected");
     }
   };
 
   const removeSelected = (day: HTMLDivElement) => {
-    if (day.classList.contains("day-selected")) {
-      day.classList.remove("day-selected");
+    if (day.classList.contains("calendar__day-selected")) {
+      day.classList.remove("calendar__day-selected");
     }
   };
 
   const { selectedDate } = useContext(SelectDayContext) as SelectDayContextType;
-  const calendarDays = document.querySelectorAll<HTMLDivElement>(".day");
+  const calendarDays = document.querySelectorAll<HTMLDivElement>(".calendar__day");
 
   const reloadInitialDate = () => {
     setCountMonth(0);
@@ -109,12 +109,16 @@ const Calendar = ({ date, month }: Props) => {
   };
 
   return (
-    <div className="calendar-ctnr">
-      <div className="calendar-month-year">
-        <button id="reload-today" onClick={() => {reloadInitialDate();}}>
+    <div className="calendar__ctnr">
+      <div className="calendar__date-ctnr">
+        <button
+          className="calendar__reload-today"
+          id="calendar__reload-today"
+          onClick={() => {reloadInitialDate();}}
+        >
           Today
         </button>
-        <div id="month-year">
+        <div className="calendar__month-year" id="calendar__month-year">
           <button onClick={() => {handleCountMonth("down");}}>
             <img src={leftCheveron} alt="left-pointing cheveron icon" />
           </button>
@@ -123,15 +127,19 @@ const Calendar = ({ date, month }: Props) => {
             <img src={rightCheveron} alt="right-pointing cheveron icon" />
           </button>
         </div>
-        <button id="add-event-btn" onClick={() => {console.log("add event");}}>
+        <button
+        className="calendar__add-event-btn"
+          id="calendar__add-event-btn"
+          onClick={() => {console.log("add event");}}
+        >
           +
         </button>
       </div>
-      <div className="calendar-grid">
+      <div className="calendar__grid">
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((item) => {
           return React.createElement(
             "div",
-            { className: "day-name", key: item },
+            { className: "calendar__day-name", key: item },
             item
           );
         })}
@@ -143,9 +151,9 @@ const Calendar = ({ date, month }: Props) => {
               date.getMonth() === currMonthIndex &&
               date.getDate() === normalizedIndex
             ) {
-              return createDay("day first-day today day-selected", index, normalizedIndex);
+              return createDay("calendar__day calendar__first-day calendar__today calendar__day-selected", index, normalizedIndex);
             } else {
-              return createDay("day first-day", index, normalizedIndex);
+              return createDay("calendar__day calendar__first-day", index, normalizedIndex);
             }
           } else if (
             firstDayCurrMonth < index &&
@@ -156,12 +164,12 @@ const Calendar = ({ date, month }: Props) => {
               date.getMonth() === currMonthIndex &&
               date.getDate() === normalizedIndex
             ) {
-              return createDay("day today day-selected", index, normalizedIndex);
+              return createDay("calendar__day calendar__today calendar__day-selected", index, normalizedIndex);
             } else {
-              return createDay("day", index, normalizedIndex);
+              return createDay("calendar__day", index, normalizedIndex);
             }
           } else {
-            return createDay("day empty", index);
+            return createDay("calendar__day calendar__empty", index);
           }
         })}
       </div>

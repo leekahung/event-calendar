@@ -9,7 +9,7 @@ interface Props {
 const SelectDayButton = ({ dateValue, removeSelected }: Props) => {
   const { selectedDate } = useContext(SelectDayContext) as SelectDayContextType;
   const extractMonthYear = () => {
-    const monthYear = document.querySelector("#month-year > h1") as HTMLDivElement;
+    const monthYear = document.querySelector(".calendar__month-year > h1") as HTMLDivElement;
     const monthYearString = String(monthYear.innerText).split(" ");
 
     return {
@@ -19,16 +19,16 @@ const SelectDayButton = ({ dateValue, removeSelected }: Props) => {
   };
 
   const handleSelectDay = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const calendarDays = document.querySelectorAll<HTMLDivElement>(".day");
+    const calendarDays = document.querySelectorAll<HTMLDivElement>(".calendar__day");
     calendarDays.forEach((day) => removeSelected(day));
 
     const target = event.target as HTMLElement;
     if (target.nodeName === "BUTTON") {
       const parent = target.parentElement as HTMLDivElement;
-      parent.classList.add("day-selected");
+      parent.classList.add("calendar__day-selected");
     } else {
       const container = target.closest(".day") as HTMLDivElement;
-      container.classList.add("day-selected");
+      container.classList.add("calendar__day-selected");
     }
 
     const { month, year } = extractMonthYear();

@@ -43,7 +43,7 @@ button {
 
 /* Calendar Section */
 
-.calendar-ctnr {
+.calendar__ctnr {
   width: 70%;
   height: 100%;
   background-color: lightgrey;
@@ -51,52 +51,49 @@ button {
   transition: 0.4s;
 }
 
-.calendar-month-year {
+.calendar__date-ctnr {
   text-align: center;
   width: 90%;
   position: relative;
   gap: 20px;  
 }
 
-.calendar-month-year button {
+.calendar__date-ctnr button {
   width: 40px;
   height: 40px;
   background-color: transparent;
 }
 
-#reload-today {
+.calendar__date-ctnr .calendar__reload-today {
   background-color: rgb(240, 240, 240);
   border: 1px solid rgb(45, 55, 55);
   border-radius: 20px;
+  width: 60px;
+  font-size: 1.6rem;
 }
 
-#add-event-btn {
+.calendar__date-ctnr .calendar__add-event-btn {
   font-size: 2.8rem;
   background-color: rgb(240, 240, 240);
   border: 1px solid rgb(45, 55, 55);
   border-radius: 5px;
 }
 
-.calendar-month-year button img {
+.calendar__date-ctnr button img {
   width: 100%;
   height: 100%;
 }
 
-#month-year {
+.calendar__month-year {
   height: 40px;
   width: max(400px, 30%);
 }
 
-#month-year h1 {
+.calendar__month-year h1 {
   width: 300px;
 }
 
-#reload-today {
-  width: 60px;
-  font-size: 1.6rem;
-}
-
-.calendar-grid {
+.calendar__grid {
   width: 90%;
   height: 85%;
   border: 1px solid grey;
@@ -108,32 +105,32 @@ button {
   margin: 20px;
 }
 
-.day-name {
+.calendar__day-name {
   width: auto;
   height: 100%;
   background-color: rgb(240, 240, 240);
 }
 
-.day-name:is(:nth-child(7n-6), :nth-child(7n)) {
+.calendar__day-name:is(:nth-child(7n-6), :nth-child(7n)) {
   background-color: rgb(180, 180, 180);
   color: rgb(140, 0, 0);
 }
 
-.day {
+.calendar__day {
   width: auto;
   height: 100%;
   background-color: rgb(240, 240, 240);
 }
 
-.day:is(:nth-child(7n-6), :nth-child(7n)) {
+.calendar__day:is(:nth-child(7n-6), :nth-child(7n)) {
   background-color: rgb(180, 180, 180);
 }
 
-.day.empty {
+.calendar__day.calendar__empty {
   pointer-events: none;
 }
 
-.day > button {
+.calendar__day > button {
   width: 100%;
   height: 100%;
   background-color: transparent;
@@ -143,7 +140,7 @@ button {
   padding: 10px;
 }
 
-.day > button > p {
+.calendar__day > button > p {
   width: 40px;
   height: 40px;
   display: flex;
@@ -153,12 +150,12 @@ button {
   border-radius: 50%;
 }
 
-.day.day-selected > button > p {
+.calendar__day.calendar__day-selected > button > p {
   background-color: lightblue;
 }
 
 /* Event Section */
-.event-bar {
+.events {
   width: max(300px, 30%);
   height: 100%;
   background-color: rgb(240, 240, 240);
@@ -166,20 +163,20 @@ button {
   flex-direction: column;
 }
 
-.events-today, .events-all {
+.events__today, .events__all {
   width: 100%;
   height: 50%;
   flex-direction: column;
   font-size: 2rem;
 }
 
-.events-today {
+.events__today {
   border-bottom: 1px solid grey;
 }
 
 /* Hover Effects */
 @media (hover: hover) and (pointer: fine) {
-  .day:hover {
+  .calendar__day:hover {
     background-color: rgb(130, 168, 202);
   }
 }
@@ -191,62 +188,62 @@ button {
     transition: 0.4s;
   }
 
-  .calendar-ctnr {
+  .calendar__ctnr {
     width: 100%;
   }
 
-  .calendar-grid {
+  .calendar__grid {
     width: 100%;
     height: 100%;
     margin: 20px 0 0 0;
   }
 
-  #month-year {
+  .calendar__month-year {
     width: 350px;
   }
 
-  .calendar-month-year {
+  .calendar__date-ctnr {
     margin: 20px 0 0 0;
   }
 
-  #month-year h1 {
+  .calendar__month-year h1 {
     width: 200px;
     font-size: 2.4rem;
   }
 
-  .day > button {
+  .calendar__day > button {
     padding: 5px;
   }
 
-  .day > button > p {
+  .calendar__day > button > p {
     width: 20px;
     height: 20px;
     font-size: 1.2rem;
   }
 
-  .event-bar {
+  .events {
     width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .calendar-month-year {
+  .calendar__date-ctnr {
     gap: 0;
   }
 
-  #reload-today, #add-event-btn {
+  .calendar__reload-today, .calendar__add-event-btn {
     height: 30px;
   }
 
-  #reload-today {
+  .calendar__reload-today {
     font-size: 1.2rem;
   }
 
-  #add-event-btn {
+  .calendar__add-event-btn {
     font-size: 2rem;
   }
 
-  #month-year h1 {
+  .calendar__month-year h1 {
     width: 120px;
     font-size: 1.6rem;
   }
