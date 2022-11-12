@@ -62,7 +62,7 @@ const Calendar = ({ date, month }: Props) => {
   let firstDayCurrMonth = getFirstDayIndex();
 
   const resetSelected = (day: HTMLDivElement) => {
-    if (day.classList.contains("today")) {
+    if (day.classList.contains("calendar__today")) {
       day.classList.add("calendar__day-selected");
     }
   };

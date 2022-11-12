@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import "./App.css";
+import "./App.scss";
 import Calendar from "./components/calendar/Calendar";
 
 /* useContext hook for Selecting Specific Dates */

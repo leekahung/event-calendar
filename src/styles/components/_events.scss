@@ -1,0 +1,23 @@
+@use "../utils/" as u;
+
+/* Event Section */
+.events {
+  @include u.box-size(100%, max(300px, 30%));
+  background-color: rgb(240, 240, 240);
+  transition: 0.4s;
+  flex-direction: column;
+
+  @media (max-width: 1080px) {
+    width: 100%;
+  }
+}
+
+.events__today, .events__all {
+  @include u.box-size(50%, 100%);
+  flex-direction: column;
+  font-size: 2rem;
+}
+
+.events__today {
+  border-bottom: 1px solid grey;
+}

@@ -1,0 +1,30 @@
+@use "../utils/" as u;
+
+html {
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+}
+
+body {
+  height: 100%;
+  height: calc(var(--vh, 1vh) * 100);
+  position: relative;
+}
+
+div, #dialog-content, button {
+  @include u.flex-align(center, center);
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+.App {
+  @include u.box-size(100%, 100%);
+  background-color: rgb(240 , 240, 240);
+  display: flex;
+  position: absolute;
+  top: 0;
+}

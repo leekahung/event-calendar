@@ -1,0 +1,66 @@
+html {
+  font-size: 62.5%;
+  color: var(--color-font);
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+.calendar {
+  &__date-ctnr {
+    .calendar__reload-today {
+      font-size: 1.6rem;
+
+      @media (max-width: 480px) {
+        font-size: 1.2rem;
+      }
+    }
+
+    .calendar__add-event-btn {
+      font-size: 2.8rem;
+
+      @media (max-width: 480px) {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  &__month-year {
+    h1 {
+      @media (max-width: 1080px) {
+        font-size: 2.4rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 1.6rem;
+      }
+    }
+  }
+
+  &__day-name {
+    &:is(:nth-child(7n-6), :nth-child(7n)) {
+    color: rgb(140, 0, 0); 
+    }
+  }
+
+  &__day {
+    p {
+      font-size: 1.6rem;
+    }
+
+    button {
+      p {
+        @media (max-width: 1080px) {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+
+  &__day.calendar__day-selected {
+    p {
+      background-color: lightblue;
+    }
+  } 
+}

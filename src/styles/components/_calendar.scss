@@ -1,0 +1,140 @@
+@use "../utils" as u;
+
+.calendar {
+  @include u.box-size(100%, 70%);
+  background-color: var(--color-light-2);
+  flex-direction: column;
+  transition: 0.4s;
+
+  @media (max-width: 1080px) {
+    width: 100%;
+  }
+
+  &__date-ctnr {
+    width: 90%;
+    position: relative;
+    text-align: center;
+    gap: 20px;
+
+    @media (max-width: 1080px) {
+      margin: 20px 0 0 0;
+    }
+
+    @media (max-width: 480px) {
+      gap: 0;
+    }
+
+    button {
+      @include u.box-size(40px, 40px);
+      background-color: transparent;
+
+      img {
+        @include u.box-size(100%, 100%);
+      }
+    }
+  }
+
+  &__date-ctnr > &__reload-today,
+  &__date-ctnr > &__add-event-btn {
+    background-color: var(--color-light-1);
+    border: 1px solid var(--color-dark-2);
+
+    @media (max-width: 480px) {
+      height: 30px;
+    }
+  }
+
+  &__date-ctnr > &__reload-today {
+    border-radius: 20px;
+    width: 60px;
+  }
+
+  &__date-ctnr > &__add-event-btn {
+    border-radius: 5px; 
+  }
+
+  &__month-year {
+    @include u.box-size(40px, max(400px, 30%));
+
+    @media (max-width: 1080px) {
+      width: 350px;
+    }
+    
+    h1 {
+      width: 300px;
+
+      @media (max-width: 1080px) {
+        width: 200px;
+      }
+
+      @media (max-width: 480px) {
+        width: 120px;
+      }
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 40px repeat(6, 1fr);
+    @include u.box-size(85%, 95%);
+    border: 1px solid var(--color-dark-1);
+    background-color: var(--color-dark-1);
+    gap: 1px;
+    margin: 20px;
+
+    @media (max-width: 1080px) {
+      @include u.box-size(100%, 100%);
+      margin: 20px 0 0 0;
+    }
+  }
+
+  &__day-name {
+    @include u.box-size(100%, auto);
+    background-color: var(--color-light-1);
+
+    &:is(:nth-child(7n-6), :nth-child(7n)) {
+      background-color: var(--color-light-2);
+    }
+  }
+
+  &__day {
+    @include u.box-size(100%, 100%);
+    background-color: var(--color-light-1);
+
+    button {
+      @include u.box-size(100%, 100%);
+      @include u.flex-align(flex-start, flex-start);
+      background-color: transparent;
+      padding: 10px;
+      
+      @media (max-width: 1080px) {
+        padding: 5px;
+      }
+
+      p {
+        @include u.box-size(40px, 40px);
+        @include u.flex-align(center, center);
+        border-radius: 50%;
+
+        @media (max-width: 1080px) {
+          @include u.box-size(20px, 20px);
+        }
+      }
+    }
+
+    &:is(:nth-child(7n-6), :nth-child(7n)) {
+      background-color: var(--color-light-2); 
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: rgb(130, 168, 202);
+      }
+    }
+  }
+
+  &__empty {
+    pointer-events: none; 
+  }
+}

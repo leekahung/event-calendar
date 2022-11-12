@@ -27,7 +27,7 @@ const SelectDayButton = ({ dateValue, removeSelected }: Props) => {
       const parent = target.parentElement as HTMLDivElement;
       parent.classList.add("calendar__day-selected");
     } else {
-      const container = target.closest(".day") as HTMLDivElement;
+      const container = target.closest(".calendar__day") as HTMLDivElement;
       container.classList.add("calendar__day-selected");
     }
 
