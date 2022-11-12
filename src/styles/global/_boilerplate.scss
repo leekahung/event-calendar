@@ -27,4 +27,8 @@ button {
   display: flex;
   position: absolute;
   top: 0;
+
+  @media (max-width: 1080px) {
+    flex-direction: column;
+  }
 }
