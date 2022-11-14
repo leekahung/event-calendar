@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import "./App.scss";
 import Calendar from "./components/calendar/Calendar";
 import AddNewEvent from "./components/events/AddNewEvent";

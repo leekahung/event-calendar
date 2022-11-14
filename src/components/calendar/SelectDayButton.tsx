@@ -40,6 +40,7 @@ const SelectDayButton = ({ dateValue, removeSelected }: Props) => {
     <>
       <button onClick={handleSelectDay}>
         <p>{dateValue}</p>
+        <div className={`${dateValue}`}></div>
       </button>
     </>
   );
