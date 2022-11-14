@@ -102,7 +102,9 @@ const Calendar = ({ date, month, toggleModal }: Props) => {
           "div",
           { className: classNames, key: keyIndex },
           <SelectDayButton
+            month={currMonth}
             dateValue={dateValue}
+            year={currYear}
             removeSelected={removeSelected}
           />
         )

@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import "./App.scss";
 import Calendar from "./components/calendar/Calendar";
 import AddNewEvent from "./components/events/AddNewEvent";
@@ -64,7 +64,38 @@ function App() {
   }
 
   // useState hook for creating/storing events from event modal
-  const [events, setEvents] = useState<Events[]>([]);
+  const [events, setEvents] = useState<Events[]>([
+    {
+      id: "0",
+      date: "November 2, 2022",
+      title: "Test Event 1",
+      description: "Some Description"
+    },
+    {
+      id: "1",
+      date: "November 2, 2022",
+      title: "Test Event 2",
+      description: "Some Description"
+    },
+    {
+      id: "2",
+      date: "November 3, 2022",
+      title: "Test Event 3",
+      description: "Some Description"
+    },
+    {
+      id: "3",
+      date: "November 14, 2022",
+      title: "Test Event 4",
+      description: "Some Description"
+    },
+    {
+      id: "4",
+      date: "December 10, 2022",
+      title: "Test Event 5",
+      description: "Some Description"
+    }
+  ]);
 
   const addNewEvent = (
     date: string,

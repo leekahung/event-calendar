@@ -2,22 +2,14 @@ import React, { useContext } from "react";
 import { SelectDayContext, SelectDayContextType } from "../../App";
 
 interface Props {
+  month: string;
   dateValue: number;
+  year: number;
   removeSelected: (day: HTMLDivElement) => void;
 }
 
-const SelectDayButton = ({ dateValue, removeSelected }: Props) => {
-  const { selectedDate } = useContext(SelectDayContext) as SelectDayContextType;
-  const extractMonthYear = () => {
-    const monthYear = document.querySelector(".calendar__month-year > h1") as HTMLDivElement;
-    const monthYearString = String(monthYear.innerText).split(" ");
-
-    return {
-      month: monthYearString[0],
-      year: Number(monthYearString[1]),
-    };
-  };
-
+const SelectDayButton = ({ month, dateValue, year, removeSelected }: Props) => {
+  const { selectedDate, events } = useContext(SelectDayContext) as SelectDayContextType;
   const handleSelectDay = (event: React.MouseEvent<HTMLButtonElement>) => {
     const calendarDays = document.querySelectorAll<HTMLDivElement>(".calendar__day");
     calendarDays.forEach((day) => removeSelected(day));
@@ -31,16 +23,47 @@ const SelectDayButton = ({ dateValue, removeSelected }: Props) => {
       container.classList.add("calendar__day-selected");
     }
 
-    const { month, year } = extractMonthYear();
-
     selectedDate(month, dateValue, year);
   };
 
+  const groupCurrMonthEvents: [string, number][] = Object.entries(events
+    .filter(event => event.date.split(", ")[0].split(" ")[0] === month)
+    .reduce((results: any, events) => {
+      const dateClass = events.date.replaceAll(", ", "-").replace(" ", "-");
+      results[dateClass] = results[dateClass] || [];
+      results[dateClass]++;
+      return results;
+    }, Object.create(null)));
+
+  const fillEventCounter = (dateClass: string) => {
+    const mediaQuery = window.matchMedia("(max-width: 400px)");
+
+    if (mediaQuery.matches) {
+      for (let i = 0; i < (groupCurrMonthEvents.length); i++) {
+        if (groupCurrMonthEvents[i][0] === dateClass) {
+          return (groupCurrMonthEvents[i][1] === 1) 
+            ? (<div>{groupCurrMonthEvents[i][1]} Event</div>)
+            : (<div>{groupCurrMonthEvents[i][1]} Events</div>);
+        }
+      }
+    } else {
+      for (let i = 0; i < (groupCurrMonthEvents.length); i++) {
+        if (groupCurrMonthEvents[i][0] === dateClass) {
+          return (groupCurrMonthEvents[i][1] === 1) 
+            ? (<div>{groupCurrMonthEvents[i][1]} Event</div>)
+            : (<div>{groupCurrMonthEvents[i][1]} Events</div>);
+        }
+      }
+    }
+  }
+
   return (
     <>
-      <button onClick={handleSelectDay}>
+      <button className="calendar__day-select-btn" onClick={handleSelectDay}>
         <p>{dateValue}</p>
-        <div className={`${dateValue}`}></div>
+        <div className={`${month}-${dateValue}-${year}`}>
+          {fillEventCounter(`${month}-${dateValue}-${year}`)}
+        </div>
       </button>
     </>
   );

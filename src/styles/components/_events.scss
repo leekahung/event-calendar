@@ -18,7 +18,7 @@
   }
 
   @media (max-width: 1080px) {
-    width: 100%;
+    @include u.box-size(40%, 100%); 
   }
 
   &__today {

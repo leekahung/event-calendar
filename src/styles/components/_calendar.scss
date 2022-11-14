@@ -8,7 +8,7 @@
   transition: 0.4s;
 
   @media (max-width: 1080px) {
-    width: 100%;
+    @include u.box-size(100%, 100%);
   }
 
   &__date-ctnr {
@@ -103,25 +103,29 @@
     @include u.box-size(100%, 100%);
     background-color: colors.$color-light-1;
 
-    button {
+    .calendar__day-select-btn {
       @include u.box-size(100%, 100%);
-      @include u.flex-align(flex-start, flex-start);
+      @include u.flex-align(space-between, flex-start);
       flex-direction: column;
       background-color: transparent;
       padding: 10px;
       
-      @media (max-width: 1080px) {
-        padding: 5px;
-      }
-
       p {
         @include u.box-size(40px, 40px);
         @include u.flex-align(center, center);
         border-radius: 50%;
 
         @media (max-width: 1080px) {
-          @include u.box-size(20px, 20px);
+          @include u.box-size(30px, 30px);
         }
+
+        @media (max-width: 480px) {
+          @include u.box-size(22px, 22px);
+        }
+      }
+      
+      @media (max-width: 1080px) {
+        padding: 5px;
       }
     }
 
