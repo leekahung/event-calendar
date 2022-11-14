@@ -7,15 +7,16 @@ import { SelectDayContext, SelectDayContextType } from "../../App";
 interface Props {
   date: Date;
   month: string[];
+  toggleModal: () => void;
 }
 
-const Calendar = ({ date, month }: Props) => {
-  /* JavaScript Modulo Function Implementation */
+const Calendar = ({ date, month, toggleModal }: Props) => {
+  // JavaScript Modulo Function Implementation
   const mod = (a: number, b: number) => {
     return ((a % b) + b) % b;
   };
 
-  /* Helper functions to help set initial values for calendar */
+  // Helper functions to help set initial values for calendar
   const daysInMonth = (year: number, monthIndex: number) => {
     return new Date(year, monthIndex, 0).getDate();
   };
@@ -108,6 +109,11 @@ const Calendar = ({ date, month }: Props) => {
       : React.createElement("div", { className: classNames, key: keyIndex });
   };
 
+  // Helper functions to toggle Event Modal
+  const handleModal = () => {
+    toggleModal();
+  }
+
   return (
     <div className="calendar">
       <div className="calendar__date-ctnr">
@@ -130,7 +136,7 @@ const Calendar = ({ date, month }: Props) => {
         <button
         className="calendar__add-event-btn"
           id="calendar__add-event-btn"
-          onClick={() => {console.log("add event");}}
+          onClick={() => {handleModal();}}
         >
           +
         </button>

@@ -1,4 +1,5 @@
 @use "../utils/" as u;
+@use "../global/colors" as colors;
 
 /* Event Section */
 .events {
@@ -6,18 +7,41 @@
   background-color: rgb(240, 240, 240);
   transition: 0.4s;
   flex-direction: column;
+  position: relative;
+  padding: 10px;
+  overflow-y: scroll;
+  -ms-overflow-style: none; // hide scrollbar for IE, Edge
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   @media (max-width: 1080px) {
     width: 100%;
   }
-}
 
-.events__today, .events__all {
-  @include u.box-size(50%, 100%);
-  flex-direction: column;
-  font-size: 2rem;
-}
+  &__today {
+    @include u.box-size(100%, 100%);
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size: 2rem;
+  }
 
-.events__today {
-  border-bottom: 1px solid grey;
+  &__today-list {
+    list-style: none;
+    text-align: center;
+    width: 90%;
+    
+    li {
+      @include u.flex-align(center, center);
+      @include u.box-size(100px, 100%);
+      margin-top: 10px;
+      border: 1px solid colors.$color-dark-2;
+    }
+
+    li:last-of-type {
+      margin-bottom: 10px;
+    }
+  }
 }
