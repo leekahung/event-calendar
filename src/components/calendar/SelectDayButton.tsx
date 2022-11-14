@@ -36,23 +36,11 @@ const SelectDayButton = ({ month, dateValue, year, removeSelected }: Props) => {
     }, Object.create(null)));
 
   const fillEventCounter = (dateClass: string) => {
-    const mediaQuery = window.matchMedia("(max-width: 400px)");
-
-    if (mediaQuery.matches) {
-      for (let i = 0; i < (groupCurrMonthEvents.length); i++) {
-        if (groupCurrMonthEvents[i][0] === dateClass) {
-          return (groupCurrMonthEvents[i][1] === 1) 
-            ? (<div>{groupCurrMonthEvents[i][1]} Event</div>)
-            : (<div>{groupCurrMonthEvents[i][1]} Events</div>);
-        }
-      }
-    } else {
-      for (let i = 0; i < (groupCurrMonthEvents.length); i++) {
-        if (groupCurrMonthEvents[i][0] === dateClass) {
-          return (groupCurrMonthEvents[i][1] === 1) 
-            ? (<div>{groupCurrMonthEvents[i][1]} Event</div>)
-            : (<div>{groupCurrMonthEvents[i][1]} Events</div>);
-        }
+    for (let i = 0; i < (groupCurrMonthEvents.length); i++) {
+      if (groupCurrMonthEvents[i][0] === dateClass) {
+        return (groupCurrMonthEvents[i][1] === 1) 
+          ? (<div>{groupCurrMonthEvents[i][1]} Event</div>)
+          : (<div>{groupCurrMonthEvents[i][1]} Events</div>);
       }
     }
   }
