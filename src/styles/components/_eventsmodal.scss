@@ -1,0 +1,16 @@
+@use "../utils/" as u;
+
+.events-modal {
+  @include u.box-size(100%, 100%);
+  position: absolute;
+
+  &__contents {
+    @include u.box-size(400px, 300px);
+    @include u.flex-align(flex-start, flex-start);
+    background-color: lightgrey;
+    flex-direction: column;
+    padding: 30px;
+    gap: 20px;
+    border-radius: 20px; 
+  }
+}

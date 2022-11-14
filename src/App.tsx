@@ -2,6 +2,8 @@ import React, { createContext, useState } from "react";
 import "./App.scss";
 import Calendar from "./components/calendar/Calendar";
 import AddNewEvent from "./components/events/AddNewEvent";
+import Events from "./components/events/Events";
+import SelectedEvent from "./components/events/SelectedEvent";
 
 // useContext hook for Selecting Specific Dates
 export type SelectDayContextType = {
@@ -51,9 +53,14 @@ function App() {
 
   // useState hook for toggling add event modal
   const [showModal, setShowModal] = useState(false);
+  const [showEventModal, setShowEventModal] = useState(false);
 
   const toggleModal = () => {
     setShowModal(!showModal);
+  }
+
+  const toggleEventModal = () => {
+    setShowEventModal(!showEventModal);
   }
 
   // useState hook for creating/storing events from event modal
@@ -72,11 +79,27 @@ function App() {
     }])
   };
 
+  // useState hook for selecting events from events
+  const [selectedEventId, setSelectedEventId] = useState("0");
+
+  const selectEventId = (
+    id: string
+  ) => {
+    setSelectedEventId(id);
+  }
+
   window.addEventListener("click", (event) => {
     if (showModal) {
-      const eventsModal = document.querySelector(".add-events") as HTMLDivElement;
-      if (event.target === eventsModal) {
+      const addEventsModal = document.querySelector(".add-events") as HTMLDivElement;
+      if (event.target === addEventsModal) {
         toggleModal();
+      }
+    }
+
+    if (showEventModal) {
+      const eventsModal = document.querySelector(".events-modal") as HTMLDivElement;
+      if (event.target === eventsModal) {
+        toggleEventModal();
       }
     }
   });
@@ -90,24 +113,23 @@ function App() {
           toggleModal={toggleModal}
         />
       </SelectDayContext.Provider>
-      <div className="events">
-        <div className="events__today">
-          <div className="events__today-header">
-            {selectedMonth} {selectedDay}, {selectedYear}
-          </div>
-          <ul className="events__today-list">
-            {[...events]
-              .filter(event => event.date === `${selectedMonth} ${selectedDay}, ${selectedYear}`)
-              .map(filteredEvent => {
-              return (
-                <li key={filteredEvent.id}>
-                  {filteredEvent.title}
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      </div>
+      <Events
+        month={selectedMonth}
+        day={selectedDay}
+        year={selectedYear}
+        events={events}
+        toggleEventModal={toggleEventModal}
+        selectEventId={selectEventId}
+      />
+      {
+        showEventModal &&
+        (
+          <SelectedEvent
+            events={events}
+            selectedEventId={selectedEventId}
+          />
+        )
+      }
       { showModal &&
         (
           <SelectDayContext.Provider value={{ selectedDate, events }}>

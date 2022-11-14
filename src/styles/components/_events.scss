@@ -29,18 +29,18 @@
   }
 
   &__today-list {
-    list-style: none;
-    text-align: center;
+    flex-direction: column;
     width: 90%;
     
-    li {
+    button {
       @include u.flex-align(center, center);
       @include u.box-size(100px, 100%);
+      font-size: 1.6rem;
       margin-top: 10px;
       border: 1px solid colors.$color-dark-2;
     }
 
-    li:last-of-type {
+    button:last-of-type {
       margin-bottom: 10px;
     }
   }
