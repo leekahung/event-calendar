@@ -10,6 +10,8 @@ interface Props {
 
 const SelectDayButton = ({ month, dateValue, year, removeSelected }: Props) => {
   const { selectedDate, events } = useContext(SelectDayContext) as SelectDayContextType;
+  
+  // Handle function for day selection
   const handleSelectDay = (event: React.MouseEvent<HTMLButtonElement>) => {
     const calendarDays = document.querySelectorAll<HTMLDivElement>(".calendar__day");
     calendarDays.forEach((day) => removeSelected(day));
@@ -26,6 +28,7 @@ const SelectDayButton = ({ month, dateValue, year, removeSelected }: Props) => {
     selectedDate(month, dateValue, year);
   };
 
+  // Helper function to filter events to month shown
   const groupCurrMonthEvents: [string, number][] = Object.entries(events
     .filter(event => event.date.split(", ")[0].split(" ")[0] === month)
     .reduce((results: any, events) => {
@@ -35,6 +38,7 @@ const SelectDayButton = ({ month, dateValue, year, removeSelected }: Props) => {
       return results;
     }, Object.create(null)));
 
+  // Helper function to display number of events on days with events
   const fillEventCounter = (dateClass: string) => {
     for (let i = 0; i < (groupCurrMonthEvents.length); i++) {
       if (groupCurrMonthEvents[i][0] === dateClass) {

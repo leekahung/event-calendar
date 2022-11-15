@@ -1,9 +1,14 @@
+import React, { useContext } from "react";
+import { SelectDayContext, SelectDayContextType } from "../../App";
+
 interface Props {
-  events: Events[];
   selectedEventId: string;
 }
 
-const SelectedEvent = ({ events, selectedEventId }: Props) => {
+const SelectedEvent = ({ selectedEventId }: Props) => {
+  const { events } = useContext(SelectDayContext) as SelectDayContextType;
+
+  // useContext hook to select specific event from events list
   const selectedEvent = events[Number(selectedEventId)];
 
   return (

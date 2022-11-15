@@ -143,27 +143,23 @@ function App() {
           month={month}
           toggleModal={toggleModal}
         />
-      </SelectDayContext.Provider>
-      <Events
-        month={selectedMonth}
-        day={selectedDay}
-        year={selectedYear}
-        events={events}
-        toggleEventModal={toggleEventModal}
-        selectEventId={selectEventId}
-      />
-      {
-        showEventModal &&
-        (
-          <SelectedEvent
-            events={events}
-            selectedEventId={selectedEventId}
-          />
-        )
-      }
-      { showModal &&
-        (
-          <SelectDayContext.Provider value={{ selectedDate, events }}>
+        <Events
+          month={selectedMonth}
+          day={selectedDay}
+          year={selectedYear}
+          toggleEventModal={toggleEventModal}
+          selectEventId={selectEventId}
+        />
+        {
+          showEventModal &&
+          (
+            <SelectedEvent
+              selectedEventId={selectedEventId}
+            />
+          )
+        }
+        { showModal &&
+          (
             <AddNewEvent 
               month={selectedMonth}
               day={selectedDay}
@@ -171,9 +167,9 @@ function App() {
               toggleModal={toggleModal}
               addNewEvent={addNewEvent}
             />
-          </SelectDayContext.Provider>
-        )
-      }
+          )
+        }
+      </SelectDayContext.Provider>
     </div>
   );
 }

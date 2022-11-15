@@ -14,9 +14,11 @@ interface Props {
 }
 
 const AddNewEvent = ({ month, day, year, toggleModal, addNewEvent }: Props) => {
+  // useRef hook to set initial value for event title and description
   const titleRef = useRef<HTMLInputElement>(null);
   const descRef = useRef<HTMLInputElement>(null);
 
+  // Handle function for form submission or form closing
   const handleSubmit = () => {
     const date = `${month} ${day}, ${year}`;
     let title = titleRef.current?.value as string;
