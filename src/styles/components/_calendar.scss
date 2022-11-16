@@ -24,6 +24,38 @@
     @media (max-width: 480px) {
       gap: 0;
     }
+    
+    &__reload-today,
+    &__add-event-btn {
+      background-color: colors.$color-light-1;
+      border: 1px solid colors.$color-dark-2;;
+    }
+  
+    &__reload-today {
+      border-radius: 20px;
+      @include u.box-size(40px, 60px);
+
+      @media (max-width: 480px) {
+        height: 30px;
+      }
+    }
+
+    &__add-event-btn {
+      @include u.box-size(40px, 40px);
+      border-radius: 5px;
+
+      @media (max-width: 480px) {
+        height: 30px;
+      }
+    }
+  }
+
+  &__month-year {
+    @include u.box-size(40px, max(400px, 30%));
+
+    @media (max-width: 1080px) {
+      width: 350px;
+    }
 
     button {
       @include u.box-size(40px, 40px);
@@ -32,33 +64,6 @@
       img {
         @include u.box-size(100%, 100%);
       }
-    }
-  }
-
-  &__date-ctnr > &__reload-today,
-  &__date-ctnr > &__add-event-btn {
-    background-color: colors.$color-light-1;
-    border: 1px solid colors.$color-dark-2;;
-
-    @media (max-width: 480px) {
-      height: 30px;
-    }
-  }
-
-  &__date-ctnr > &__reload-today {
-    border-radius: 20px;
-    width: 60px;
-  }
-
-  &__date-ctnr > &__add-event-btn {
-    border-radius: 5px; 
-  }
-
-  &__month-year {
-    @include u.box-size(40px, max(400px, 30%));
-
-    @media (max-width: 1080px) {
-      width: 350px;
     }
     
     h1 {
@@ -103,7 +108,7 @@
     @include u.box-size(100%, 100%);
     background-color: colors.$color-light-1;
 
-    .calendar__day-select-btn {
+    &__select-btn {
       @include u.box-size(100%, 100%);
       @include u.flex-align(space-between, flex-start);
       flex-direction: column;

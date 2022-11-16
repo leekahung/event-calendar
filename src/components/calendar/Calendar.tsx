@@ -99,8 +99,8 @@ const Calendar = ({ month, date, toggleModal }: Props) => {
     <div className="calendar">
       <div className="calendar__date-ctnr">
         <button
-          className="calendar__reload-today"
-          id="calendar__reload-today"
+          className="calendar__date-ctnr__reload-today"
+          id="calendar__date-ctnr__reload-today"
           onClick={() => {reloadInitialDate();}}
         >
           Today
@@ -115,8 +115,8 @@ const Calendar = ({ month, date, toggleModal }: Props) => {
           </button>
         </div>
         <button
-        className="calendar__add-event-btn"
-          id="calendar__add-event-btn"
+        className="calendar__date-ctnr__add-event-btn"
+          id="calendar__date-ctnr__add-event-btn"
           onClick={() => {handleModal();}}
         >
           +

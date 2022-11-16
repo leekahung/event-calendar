@@ -51,7 +51,7 @@ const SelectDayButton = ({ month, dateValue, year, removeSelected }: Props) => {
 
   return (
     <>
-      <button className="calendar__day-select-btn" onClick={handleSelectDay}>
+      <button className="calendar__day__select-btn" onClick={handleSelectDay}>
         <p>{dateValue}</p>
         <div className={`${month}-${dateValue}-${year}`}>
           {fillEventCounter(`${month}-${dateValue}-${year}`)}
