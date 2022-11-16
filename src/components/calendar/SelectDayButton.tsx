@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { SelectDayContext, SelectDayContextType } from "../../App";
+import { SelectDayContext } from "../../App";
 
 interface Props {
   month: string;

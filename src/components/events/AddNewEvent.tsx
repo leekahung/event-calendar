@@ -1,10 +1,8 @@
-import React, { useRef } from "react";
+import { useContext, useRef } from "react";
+import { SelectDayContext } from "../../App";
 import closeIcon from "../../assets/img/close.png";
 
 interface Props {
-  month: string;
-  day: number;
-  year: number;
   toggleModal: () => void;
   addNewEvent: (
     date: string,
@@ -13,14 +11,18 @@ interface Props {
   ) => void;
 }
 
-const AddNewEvent = ({ month, day, year, toggleModal, addNewEvent }: Props) => {
+const AddNewEvent = ({ toggleModal, addNewEvent }: Props) => {
+  const { selectedDateObj } = useContext(SelectDayContext) as SelectDayContextType;
+
+  const { selectedMonth, selectedDay, selectedYear } = selectedDateObj;
+  const date = `${selectedMonth} ${selectedDay}, ${selectedYear}`;
+
   // useRef hook to set initial value for event title and description
   const titleRef = useRef<HTMLInputElement>(null);
-  const descRef = useRef<HTMLInputElement>(null);
+  const descRef = useRef<HTMLTextAreaElement>(null);
 
   // Handle function for form submission or form closing
   const handleSubmit = () => {
-    const date = `${month} ${day}, ${year}`;
     let title = titleRef.current?.value as string;
     let description = descRef.current?.value as string;
 
@@ -34,18 +36,17 @@ const AddNewEvent = ({ month, day, year, toggleModal, addNewEvent }: Props) => {
   
   return (
     <>
-      <div className="add-events">
-        <div className="add-events__ctnr">
+      <div className="events-modal">
+        <div className="events-modal__ctnr">
           <button 
-            className="add-events__exit-btn"
+            className="events-modal__exit-btn"
             onClick={() => {handleClose();}}
           >
             <img src={closeIcon} alt="close icon" />
           </button>
           <form
-            method="dialog"
             id="events-form"
-            className="add-events__form"
+            className="events-modal__form"
             onSubmit={
               (event) => {
                 event.preventDefault();
@@ -53,19 +54,30 @@ const AddNewEvent = ({ month, day, year, toggleModal, addNewEvent }: Props) => {
               }
             }
           >
-            <label>Add Event to {month} {day}, {year}?</label>
-            <label>Event Title:</label>
-            <input
-              type="text"
-              required
-              placeholder="Add Event Title"
-              ref={titleRef}
-            />
-            <label>Event Description:</label>
-            <input
+            <div>
+              <label>Add Event?</label>
+            </div>
+            <div>
+              <label>Date: {date}</label>
+            </div>
+            <div>
+              <label htmlFor="title">Title:</label>
+              <input
+                type="text"
+                required
+                name="title"
+                placeholder="Add Event Title"
+                ref={titleRef}
+              />
+            </div>
+            <div>
+              <label htmlFor="description">Description:</label>
+              <textarea
+              name="description"
               placeholder="Add Event Description"
               ref={descRef}
-            />
+              />
+            </div>
             <button type="submit">
               Submit
             </button>

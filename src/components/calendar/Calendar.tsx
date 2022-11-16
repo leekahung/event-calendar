@@ -2,31 +2,23 @@ import React, { useContext, useState } from "react";
 import SelectDayButton from "./SelectDayButton";
 import leftCheveron from "../../assets/img/left-chevron.png";
 import rightCheveron from "../../assets/img/right-chevron.png";
-import { SelectDayContext, SelectDayContextType } from "../../App";
+import { SelectDayContext } from "../../App";
+import { resetSelected, removeSelected } from "../../utils/helper/helpSelect";
+import { daysInMonth, getFirstDayIndex } from "../../utils/helper/helpPopulate";
 
 interface Props {
-  date: Date;
   month: string[];
+  date: Date;
   toggleModal: () => void;
 }
 
-const Calendar = ({ date, month, toggleModal }: Props) => {
-  // JavaScript Modulo Function Implementation
-  const mod = (a: number, b: number) => {
-    return ((a % b) + b) % b;
-  };
+// JavaScript Modulo function implementation
+const mod = (a: number, b: number) => {
+  return ((a % b) + b) % b;
+};
 
-  // Helper functions to help set initial values for calendar
-  const daysInMonth = (year: number, monthIndex: number) => {
-    return new Date(year, monthIndex, 0).getDate();
-  };
-
-  const getFirstDayIndex = () => {
-    let dayIndex = new Date(currYear, currMonthIndex, 0).getDay() + 1;
-    return dayIndex === 7 ? 0 : dayIndex;
-  };
-
-  // Set State Hooks and Handler for changing Month and Year
+const Calendar = ({ month, date, toggleModal }: Props) => {
+  // setState hooks and handler for changing month and year
   const [countMonth, setCountMonth] = useState(0);
   const [countYear, setCountYear] = useState(0);
 
@@ -55,24 +47,12 @@ const Calendar = ({ date, month, toggleModal }: Props) => {
     }
   };
 
-  // Initial Settings for Calender values
+  // initial settings for calender values
   let currYear = date.getFullYear() + countYear;
   let currMonthIndex = mod(date.getMonth() + countMonth, 12);
   let currMonth = month[currMonthIndex];
   let daysInCurrMonth = daysInMonth(currYear, currMonthIndex + 1);
-  let firstDayCurrMonth = getFirstDayIndex();
-
-  const resetSelected = (day: HTMLDivElement) => {
-    if (day.classList.contains("calendar__today")) {
-      day.classList.add("calendar__day-selected");
-    }
-  };
-
-  const removeSelected = (day: HTMLDivElement) => {
-    if (day.classList.contains("calendar__day-selected")) {
-      day.classList.remove("calendar__day-selected");
-    }
-  };
+  let firstDayCurrMonth = getFirstDayIndex(currYear, currMonthIndex);
 
   const { selectedDate } = useContext(SelectDayContext) as SelectDayContextType;
   const calendarDays = document.querySelectorAll<HTMLDivElement>(".calendar__day");
@@ -111,7 +91,6 @@ const Calendar = ({ date, month, toggleModal }: Props) => {
       : React.createElement("div", { className: classNames, key: keyIndex });
   };
 
-  // Helper functions to toggle Event Modal
   const handleModal = () => {
     toggleModal();
   }
