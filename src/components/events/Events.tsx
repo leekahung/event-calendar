@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { SelectDayContext } from "../../App";
+import EventsList from "./EventsList";
 
 interface Props {
   toggleEventModal: () => void;
@@ -9,7 +10,7 @@ interface Props {
 }
 
 const Events = ({ toggleEventModal, selectEventId }: Props) => {
-  const { selectedDateObj, events } = useContext(SelectDayContext) as SelectDayContextType;
+  const { selectedDateObj } = useContext(SelectDayContext) as SelectDayContextType;
 
   const { selectedMonth, selectedDay, selectedYear } = selectedDateObj;
 
@@ -28,21 +29,7 @@ const Events = ({ toggleEventModal, selectEventId }: Props) => {
           <div className="events__today-header">
             {selectedMonth} {selectedDay}, {selectedYear}
           </div>
-          <div className="events__today-list">
-            {[...events]
-              .filter(event => event.date === `${selectedMonth} ${selectedDay}, ${selectedYear}`)
-              .map(filteredEvent => {
-              return (
-                <button
-                  key={filteredEvent.id}
-                  id={filteredEvent.id}
-                  onClick={(event) => {handleSelect(event);}}
-                >
-                  {filteredEvent.title}
-                </button>
-              )
-            })}
-          </div>
+          <EventsList handleSelect={handleSelect}/>
         </div>
       </div>
     </>

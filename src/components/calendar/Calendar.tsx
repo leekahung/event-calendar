@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
 import SelectDayButton from "./SelectDayButton";
-import leftCheveron from "../../assets/img/left-chevron.png";
-import rightCheveron from "../../assets/img/right-chevron.png";
 import { SelectDayContext } from "../../App";
 import { resetSelected, removeSelected } from "../../utils/helper/helpSelect";
 import { daysInMonth, getFirstDayIndex } from "../../utils/helper/helpPopulate";
+import CalendarTopGrp from "./CalendarTopGrp";
 
 interface Props {
   month: string[];
@@ -97,31 +96,13 @@ const Calendar = ({ month, date, toggleModal }: Props) => {
 
   return (
     <div className="calendar">
-      <div className="calendar__date-ctnr">
-        <button
-          className="calendar__date-ctnr__reload-today"
-          id="calendar__date-ctnr__reload-today"
-          onClick={() => {reloadInitialDate();}}
-        >
-          Today
-        </button>
-        <div className="calendar__month-year" id="calendar__month-year">
-          <button onClick={() => {handleCountMonth("down");}}>
-            <img src={leftCheveron} alt="left-pointing cheveron icon" />
-          </button>
-          <h1>{`${currMonth} ${currYear}`}</h1>
-          <button onClick={() => {handleCountMonth("up");}}>
-            <img src={rightCheveron} alt="right-pointing cheveron icon" />
-          </button>
-        </div>
-        <button
-        className="calendar__date-ctnr__add-event-btn"
-          id="calendar__date-ctnr__add-event-btn"
-          onClick={() => {handleModal();}}
-        >
-          +
-        </button>
-      </div>
+      <CalendarTopGrp
+        month={currMonth}
+        year={currYear} 
+        reloadInitialDate={reloadInitialDate}
+        handleModal={handleModal}
+        handleCountMonth={handleCountMonth}
+      />
       <div className="calendar__grid">
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((item) => {
           return React.createElement(
