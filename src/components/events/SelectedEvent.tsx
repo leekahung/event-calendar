@@ -45,7 +45,10 @@ const SelectedEvent = ({ selectedEventId, toggleEventModal, toggleEventEditModal
             <div>Event Info</div>
             <div>Date: {selectedEvent.date}</div>
             <div>Title: {selectedEvent.title}</div>
-            <div>Description: {selectedEvent.description}</div>
+            <div>
+              Description:<br />
+              {selectedEvent.description}
+            </div>
             <div className="events-modal__btn-grp">
               <button
                 className="events-modal__edit-btn"

@@ -29,6 +29,21 @@
   &__form, &__content {
     @include u.box-size(400px, 300px);
 
+    input {
+      width: 100%;
+      padding: 2px 5px;
+    }
+
+    textarea {
+      @include u.box-size(80px, 240px);
+      padding: 5px 7px;
+      resize: none;
+
+      @media (max-width: 480px) {
+        @include u.box-size(80px, 200px);
+      }
+    }
+
     @media (max-width: 480px) {
       @include u.box-size(350px, 260px);
     }
