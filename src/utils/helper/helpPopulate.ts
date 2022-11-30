@@ -7,4 +7,20 @@ const getFirstDayIndex = (year: number, monthIndex: number) => {
   return dayIndex === 7 ? 0 : dayIndex;
 };
 
-export { daysInMonth, getFirstDayIndex };
+const groupCurrMonthEvents = (
+  events: Events[],
+  month: string
+): [string, number][] => {
+  return Object.entries(
+    events
+      .filter((event) => event.date.split(", ")[0].split(" ")[0] === month)
+      .reduce((results: any, events) => {
+        const dateClass = events.date.replaceAll(", ", "-").replace(" ", "-");
+        results[dateClass] = results[dateClass] || [];
+        results[dateClass]++;
+        return results;
+      }, Object.create(null))
+  );
+};
+
+export { daysInMonth, getFirstDayIndex, groupCurrMonthEvents };

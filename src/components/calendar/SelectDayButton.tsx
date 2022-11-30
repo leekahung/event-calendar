@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { SelectDayContext } from "../../App";
+import { groupCurrMonthEvents } from "../../utils/helper/helpPopulate";
 
 interface Props {
   month: string;
@@ -29,22 +30,15 @@ const SelectDayButton = ({ month, dateValue, year, removeSelected }: Props) => {
   };
 
   // Helper function to filter events to month shown
-  const groupCurrMonthEvents: [string, number][] = Object.entries(events
-    .filter(event => event.date.split(", ")[0].split(" ")[0] === month)
-    .reduce((results: any, events) => {
-      const dateClass = events.date.replaceAll(", ", "-").replace(" ", "-");
-      results[dateClass] = results[dateClass] || [];
-      results[dateClass]++;
-      return results;
-    }, Object.create(null)));
+  const currMonthEvents = groupCurrMonthEvents(events, month);
 
   // Helper function to display number of events on days with events
   const fillEventCounter = (dateClass: string) => {
-    for (let i = 0; i < (groupCurrMonthEvents.length); i++) {
-      if (groupCurrMonthEvents[i][0] === dateClass) {
-        return (groupCurrMonthEvents[i][1] === 1) 
-          ? (<div>{groupCurrMonthEvents[i][1]} Event</div>)
-          : (<div>{groupCurrMonthEvents[i][1]} Events</div>);
+    for (let i = 0; i < (currMonthEvents.length); i++) {
+      if (currMonthEvents[i][0] === dateClass) {
+        return (currMonthEvents[i][1] === 1) 
+          ? (<div>{`${currMonthEvents[i][1]} Event`}</div>)
+          : (<div>{`${currMonthEvents[i][1]} Events`}</div>);
       }
     }
   }

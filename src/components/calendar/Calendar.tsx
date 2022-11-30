@@ -4,6 +4,7 @@ import { SelectDayContext } from "../../App";
 import { resetSelected, removeSelected } from "../../utils/helper/helpSelect";
 import { daysInMonth, getFirstDayIndex } from "../../utils/helper/helpPopulate";
 import CalendarTopGrp from "./CalendarTopGrp";
+import CalendarGrid from "./CalendarGrid";
 
 interface Props {
   month: string[];
@@ -103,44 +104,14 @@ const Calendar = ({ month, date, toggleModal }: Props) => {
         handleModal={handleModal}
         handleCountMonth={handleCountMonth}
       />
-      <div className="calendar__grid">
-        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((item) => {
-          return React.createElement(
-            "div",
-            { className: "calendar__day-name", key: item },
-            item
-          );
-        })}
-        {[...Array(42)].map((_, index) => {
-          const normalizedIndex = index - firstDayCurrMonth + 1;
-          if (index === firstDayCurrMonth) {
-            if (
-              date.getFullYear() === currYear &&
-              date.getMonth() === currMonthIndex &&
-              date.getDate() === normalizedIndex
-            ) {
-              return createDay("calendar__day calendar__first-day calendar__today calendar__day-selected", index, normalizedIndex);
-            } else {
-              return createDay("calendar__day calendar__first-day", index, normalizedIndex);
-            }
-          } else if (
-            firstDayCurrMonth < index &&
-            index < firstDayCurrMonth + daysInCurrMonth
-          ) {
-            if (
-              date.getFullYear() === currYear &&
-              date.getMonth() === currMonthIndex &&
-              date.getDate() === normalizedIndex
-            ) {
-              return createDay("calendar__day calendar__today calendar__day-selected", index, normalizedIndex);
-            } else {
-              return createDay("calendar__day", index, normalizedIndex);
-            }
-          } else {
-            return createDay("calendar__day calendar__empty", index);
-          }
-        })}
-      </div>
+      <CalendarGrid
+        date={date}
+        firstDayCurrMonth={firstDayCurrMonth}
+        currMonthIndex={currMonthIndex}
+        currYear={currYear}
+        daysInCurrMonth={daysInCurrMonth}
+        createDay={createDay}
+      />
     </div>
   );
 };
